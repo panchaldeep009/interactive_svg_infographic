@@ -43,6 +43,31 @@
 
         }
 
+        outPaths.forEach(function(thisPath,index,allPaths){ 
+            thisPath.addEventListener('mouseover', function(){
+                allPaths.forEach(thisPath => thisPath.style.opacity = 0.2);
+                outCircles.forEach(thisCircle => thisCircle.style.opacity = 0.2);
+                thisPath.style.opacity = 1;
+                outCircles[index].style.opacity = 1;
+            });
+            thisPath.addEventListener('mouseout', function(){
+                allPaths.forEach(otherPaths => otherPaths.style.opacity = 1);
+                outCircles.forEach(thisCircle => thisCircle.style.opacity = 1);
+            });
+        });
+
+        outCircles.forEach(function(thisCircle,index,allCircles){ 
+            thisCircle.addEventListener('mouseover', function(){
+                allCircles.forEach(thisCircle => thisCircle.style.opacity = 0.2);
+                outPaths.forEach(thisPath => thisPath.style.opacity = 0.2);
+                thisCircle.style.opacity = 1;
+                outPaths[index].style.opacity = 1;
+            });
+            thisCircle.addEventListener('mouseout', function(){
+                allCircles.forEach(thisCircle => thisCircle.style.opacity = 1);
+                outPaths.forEach(thisPath => thisPath.style.opacity = 1);
+            });
+        });
 
         outPaths.forEach(outPath => { outputSVG.appendChild(outPath); });
         outCircles.forEach(outCircle => { outputSVG.appendChild(outCircle); });
