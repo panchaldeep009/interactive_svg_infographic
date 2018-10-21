@@ -45,32 +45,32 @@
 
         outPaths.forEach(function(thisPath,index,allPaths){ 
             thisPath.addEventListener('mouseover', function(){
-                allPaths.forEach(thisPath => thisPath.style.opacity = 0.2);
-                outCircles.forEach(thisCircle => thisCircle.style.opacity = 0.2);
+                allPaths.map(thisPath => thisPath.style.opacity = 0.2);
+                outCircles.map(thisCircle => thisCircle.style.opacity = 0.2);
                 thisPath.style.opacity = 1;
                 outCircles[index].style.opacity = 1;
             });
             thisPath.addEventListener('mouseout', function(){
-                allPaths.forEach(otherPaths => otherPaths.style.opacity = 1);
-                outCircles.forEach(thisCircle => thisCircle.style.opacity = 1);
+                allPaths.map(otherPaths => otherPaths.style.opacity = 1);
+                outCircles.map(thisCircle => thisCircle.style.opacity = 1);
             });
         });
 
         outCircles.forEach(function(thisCircle,index,allCircles){ 
             thisCircle.addEventListener('mouseover', function(){
-                allCircles.forEach(thisCircle => thisCircle.style.opacity = 0.2);
-                outPaths.forEach(thisPath => thisPath.style.opacity = 0.2);
+                allCircles.map(thisCircle => thisCircle.style.opacity = 0.2);
+                outPaths.map(thisPath => thisPath.style.opacity = 0.2);
                 thisCircle.style.opacity = 1;
                 outPaths[index].style.opacity = 1;
             });
             thisCircle.addEventListener('mouseout', function(){
-                allCircles.forEach(thisCircle => thisCircle.style.opacity = 1);
-                outPaths.forEach(thisPath => thisPath.style.opacity = 1);
+                allCircles.map(thisCircle => thisCircle.style.opacity = 1);
+                outPaths.map(thisPath => thisPath.style.opacity = 1);
             });
         });
 
-        outPaths.forEach(outPath => { outputSVG.appendChild(outPath); });
-        outCircles.forEach(outCircle => { outputSVG.appendChild(outCircle); });
+        outPaths.map(outPath => { outputSVG.appendChild(outPath); });
+        outCircles.map(outCircle => { outputSVG.appendChild(outCircle); });
         outputSVG.appendChild(targetCircle);
     });
 
