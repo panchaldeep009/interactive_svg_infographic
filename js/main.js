@@ -3,12 +3,16 @@
     
     let blueBalls = document.querySelector("#blueBalls");
     let outputSVG = document.querySelector("#outSVG");
+    let svgNS = "http://www.w3.org/2000/svg";
 
     blueBalls.addEventListener("change", function(){
+
         outputSVG.innerHTML = "";
+
         let xRange = 200;
         let yRange = 200;
-        let targetCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+
+        let targetCircle = document.createElementNS(svgNS, 'circle');
         Object.entries({
             "cx":20,
             "cy":100,
@@ -20,9 +24,10 @@
 
         let outCircles = [];
         let outPaths = [];
+
         for (let i = 0; i < this.value; i++) {
 
-            outCircles[i] = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+            outCircles[i] = document.createElementNS(svgNS, 'circle');
             Object.entries({
                 "cx":180,
                 "cy":(yRange/(parseInt(this.value)+1))*(i+1),
@@ -32,9 +37,9 @@
                 outCircles[i].setAttribute(attrName,attrValue);
             });
 
-            outPaths[i] = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+            outPaths[i] = document.createElementNS(svgNS, 'path');
             Object.entries({
-                "d":`M24 100 C 20 100, 100 100, 180 ${(yRange/(parseInt(this.value)+1))*(i+1)}`,
+                "d":`M24 100 C 20 100, ${xRange/1.5} ${yRange/2}, 180 ${(yRange/(parseInt(this.value)+1))*(i+1)}`,
                 "fill":"transparent",
                 "stroke":"blue"
             }).forEach(([attrName, attrValue]) => {
