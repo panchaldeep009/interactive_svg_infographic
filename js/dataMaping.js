@@ -1,9 +1,10 @@
 "use strict";
 
 var Genres = [];
+var moviesWithGenres = [];
 
 (() => {
-    // Find all Genres
+    // Find all Genres and Title
     MovieData.forEach(thisMovie => {
         if(thisMovie.Response != "False"){
             thisMovie.Genre.split(', ').forEach(thisGenre =>{
@@ -13,9 +14,13 @@ var Genres = [];
                     Genres.map(g => { if(g.Name === thisGenre){ g.count++; } });
                 }
             });
+            moviesWithGenres.push({"Name": thisMovie.Title, "genre": thisMovie.Genre.split(', ')});
         }
     });
 
     // Sort Genres By it's coming
     Genres = Genres.sort(function(a,b) { return b.count - a.count });
+    
+    console.log(moviesWithGenres);
+
 })();

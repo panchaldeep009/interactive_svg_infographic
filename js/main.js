@@ -2,7 +2,7 @@
 (() => {
     
     let outputSVG = document.querySelector("#outSVG");
-    let svgSize = { "width": 300, "height": (Genres.length*20)+10 };
+    let svgSize = { "width": 300, "height": (moviesWithGenres.length*8)+10 };
 
     outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
 
@@ -22,7 +22,7 @@
                 "y2": (20*(i))+25,
                 "stroke":"rgb(255,55,55)",
                 "class": "genUnderline"
-             },genre.Name)
+             })
         );
         outputSVG.appendChild(
             createSVGElement('circle',{
@@ -30,10 +30,26 @@
                 "cy": (20*(i))+25,
                 "fill":"rgb(255,55,55)",
                 "r": 3
-             },genre.Name)
+             })
         );
     });
-
+    moviesWithGenres.forEach(function(movie,i){
+        outputSVG.appendChild(
+            createSVGElement('text',{
+                "x": 200,
+                "y": (8*(i))+10,
+                "class": "movName"
+             },movie.Name)
+        );
+        outputSVG.appendChild(
+            createSVGElement('circle',{
+                "cx": 195,
+                "cy": (8*(i))+7.5,
+                "fill":"rgb(255,55,55)",
+                "r": 2
+             })
+        );
+    });
     function createSVGElement(tag,attributes,content){
         let element = document.createElementNS("http://www.w3.org/2000/svg", tag);
         if(attributes != null){
