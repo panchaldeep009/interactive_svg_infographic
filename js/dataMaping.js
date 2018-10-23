@@ -1,7 +1,9 @@
 "use strict";
+
+var Genres = [];
+
 (() => {
     // Find all Genres
-    var Genres = [];
     MovieData.forEach(thisMovie => {
         if(thisMovie.Response != "False"){
             thisMovie.Genre.split(', ').forEach(thisGenre =>{
@@ -13,9 +15,7 @@
             });
         }
     });
-    
+
     // Sort Genres By it's coming
     Genres = Genres.sort(function(a,b) { return b.count - a.count });
-
-    console.log(Genres);
 })();

@@ -3,3 +3,21 @@
 @import '_mixins';
 
 @import '_variables';
+
+#outSVG{
+    margin-top: 50px;
+    margin-left: 50%;
+    @include transform(
+        translateX(-50%)
+    );
+}
+body{
+    background-color: #555;
+}
+.gen { 
+    font: normal 10px sans-serif;
+    fill: #FFF;
+}
+.genUnderline{ 
+    stroke-width:.5;
+}
