@@ -20,7 +20,7 @@
                 "y1": (20*(i))+25,
                 "x2": 80,
                 "y2": (20*(i))+25,
-                "stroke":"rgb(255,55,55)",
+                "stroke":genre.color,
                 "class": "genUnderline"
              })
         );
@@ -28,7 +28,7 @@
             createSVGElement('circle',{
                 "cx": 3,
                 "cy": (20*(i))+25,
-                "fill":"rgb(255,55,55)",
+                "fill":genre.color,
                 "r": 3
              })
         );
@@ -55,7 +55,7 @@
                     outputSVG.appendChild(
                         createSVGElement('path',{
                             "d": `M 195,${(8*(i))+7.5} C ${195-80},${(8*(i))+7.5},${195-80},${(20*(genI))+25},80,${(20*(genI))+25}`,
-                            "stroke":"rgb(255,55,55)",
+                            "stroke":genre.color,
                             "class": "conntLine"
                          })
                     );
