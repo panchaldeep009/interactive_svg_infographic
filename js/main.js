@@ -49,6 +49,13 @@
                 "r": 2
              })
         );
+        outputSVG.appendChild(
+            createSVGElement('path',{
+                "d": `M 195,${(8*(i))+7.5} C ${195-80},${(8*(i))+7.5},${195-80},25,80,25`,
+                "stroke":"rgb(255,55,55)",
+                "class": "conntLine"
+             })
+        );
     });
     function createSVGElement(tag,attributes,content){
         let element = document.createElementNS("http://www.w3.org/2000/svg", tag);

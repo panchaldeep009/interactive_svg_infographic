@@ -18,8 +18,9 @@ body{
     font: normal 10px sans-serif;
     fill: #FFF;
 }
-.genUnderline{ 
+.genUnderline, .conntLine{ 
     stroke-width:.5;
+    fill: transparent;
 }
 .movName{
     font: normal 6.5px sans-serif;
