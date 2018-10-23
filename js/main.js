@@ -15,7 +15,7 @@
         let targetCircle = document.createElementNS(svgNS, 'circle');
         Object.entries({
             "cx":20,
-            "cy":100,
+            "cy":(yRange/2),
             "r":10,
             "fill":"red"
         }).forEach(([attrName, attrValue]) => {
@@ -73,7 +73,6 @@
                 outPaths.map(thisPath => thisPath.style.opacity = 1);
             });
         });
-
         outPaths.map(outPath => { outputSVG.appendChild(outPath); });
         outCircles.map(outCircle => { outputSVG.appendChild(outCircle); });
         outputSVG.appendChild(targetCircle);
