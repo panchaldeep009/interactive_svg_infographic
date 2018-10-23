@@ -11,7 +11,8 @@
             createSVGElement('text',{
                 "x": 10,
                 "y": (20*(i))+20,
-                "class": "gen"
+                "class": "gen",
+                "data-genre":genre.Name
              },genre.Name)
         );
         outputSVG.appendChild(
@@ -21,7 +22,8 @@
                 "x2": 80,
                 "y2": (20*(i))+25,
                 "stroke":genre.color,
-                "class": "genUnderline"
+                "class": "genUnderline",
+                "data-genre":genre.Name
              })
         );
         outputSVG.appendChild(
@@ -29,7 +31,8 @@
                 "cx": 3,
                 "cy": (20*(i))+25,
                 "fill":genre.color,
-                "r": 3
+                "r": 3,
+                "data-genre":genre.Name
              })
         );
     });
@@ -38,7 +41,9 @@
             createSVGElement('text',{
                 "x": svgSize.width-100,
                 "y": (8*(i))+10,
-                "class": "movName"
+                "class": "movName",
+                "data-genre":movie.genres.toString(),
+                "data-movie":movie.Name
              },movie.Name)
         );
         movie.genres.forEach(function(thisGenre,thisI){
@@ -51,6 +56,8 @@
                                         ${(svgSize.width-105)-80},${(20*(genI))+25},
                                         80,${(20*(genI))+25}`,
                             "stroke":genre.color,
+                            "data-genre":genre.Name,
+                            "data-movie":movie.Name,
                             "class": "conntLine"
                          })
                     );
@@ -59,6 +66,8 @@
                             "cx": (svgSize.width-105)-(thisI*5),
                             "cy": (8*(i))+7.5,
                             "fill":genre.color,
+                            "data-genre":genre.Name,
+                            "data-movie":movie.Name,
                             "r": 2
                          })
                     );
