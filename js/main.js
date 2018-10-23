@@ -2,7 +2,7 @@
 (() => {
     
     let outputSVG = document.querySelector("#outSVG");
-    let svgSize = { "width": 300, "height": (moviesWithGenres.length*8)+10 };
+    let svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
 
     outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
 
@@ -36,27 +36,30 @@
     moviesWithGenres.forEach(function(movie,i){
         outputSVG.appendChild(
             createSVGElement('text',{
-                "x": 200,
+                "x": svgSize.width-100,
                 "y": (8*(i))+10,
                 "class": "movName"
              },movie.Name)
         );
-        outputSVG.appendChild(
-            createSVGElement('circle',{
-                "cx": 195,
-                "cy": (8*(i))+7.5,
-                "fill":"rgb(255,55,55)",
-                "r": 2
-             })
-        );
-        movie.genres.forEach(thisGenre => {
+        movie.genres.forEach(function(thisGenre,thisI){
             Genres.forEach(function(genre,genI){
                 if(genre.Name == thisGenre){
                     outputSVG.appendChild(
                         createSVGElement('path',{
-                            "d": `M 195,${(8*(i))+7.5} C ${195-80},${(8*(i))+7.5},${195-80},${(20*(genI))+25},80,${(20*(genI))+25}`,
+                            "d": `M ${(svgSize.width-105)-(thisI*5)},${(8*(i))+7.5} 
+                                    C ${(svgSize.width-105)-80},${(8*(i))+7.5},
+                                        ${(svgSize.width-105)-80},${(20*(genI))+25},
+                                        80,${(20*(genI))+25}`,
                             "stroke":genre.color,
                             "class": "conntLine"
+                         })
+                    );
+                    outputSVG.appendChild(
+                        createSVGElement('circle',{
+                            "cx": (svgSize.width-105)-(thisI*5),
+                            "cy": (8*(i))+7.5,
+                            "fill":genre.color,
+                            "r": 2
                          })
                     );
                 }
