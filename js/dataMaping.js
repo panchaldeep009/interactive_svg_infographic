@@ -14,13 +14,10 @@ var moviesWithGenres = [];
                     Genres.map(g => { if(g.Name === thisGenre){ g.count++; } });
                 }
             });
-            moviesWithGenres.push({"Name": thisMovie.Title, "genre": thisMovie.Genre.split(', ')});
+            moviesWithGenres.push({"Name": thisMovie.Title, "genres": thisMovie.Genre.split(', ')});
         }
     });
 
     // Sort Genres By it's coming
     Genres = Genres.sort(function(a,b) { return b.count - a.count });
-    
-    console.log(moviesWithGenres);
-
 })();
