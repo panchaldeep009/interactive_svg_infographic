@@ -3,17 +3,54 @@
     
     let cirInfoSVG = document.querySelector("#circularInfographic");
     let linInfoSVG = document.querySelector("#linerInfographic");
-    let svgSize = { "width": 500, "height": 500 };
+    let svgSize = { "width": 500, "height": 850 };
+
+    cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
 
     let redius = 150;
     let degree = 270;
-    let offDegree = 135;
+    let offDegree = 182.5;
     let cirX = 250;
     let cirY = 250;
-
-    cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
     
     moviesWithGenres.slice(0,(moviesWithGenres.length-1)/2).forEach(function(movie,i,allMovies){
+        cirInfoSVG.appendChild(
+            createSVGElement('circle',{
+                "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
+                "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
+                "fill":"red",
+                "r": 2
+             })
+        );
+        cirInfoSVG.appendChild(
+            createSVGElement('line',{
+                "x1": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
+                "y1": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
+                "x2": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirX,
+                "y2": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirY,
+                "stroke":"red",
+                "id":"tLine",
+                "class": "genUnderline",
+             })
+        );
+        cirInfoSVG.appendChild(
+            createSVGElement('text',{
+                "x": cirX+redius+5,
+                "y": cirY-0,
+                //"style":`transform: rotate(${((degree/allMovies.length)*i)}deg);`, 
+                "style":`transform: rotate(${((degree/allMovies.length)*i)+(offDegree)}deg); transform-origin: ${cirX}px ${cirY}px`,
+                "class": "movName"
+             },movie.Name)
+        );
+    });
+
+    redius = 150;
+    degree = 270;
+    offDegree = 0;
+    cirX = 250;
+    cirY = 550;
+    
+    moviesWithGenres.slice(((moviesWithGenres.length-1)/2),(moviesWithGenres.length-1)).forEach(function(movie,i,allMovies){
         cirInfoSVG.appendChild(
             createSVGElement('circle',{
                 "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
