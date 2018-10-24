@@ -4,9 +4,23 @@
     let outputSVG = document.querySelector("#outSVG");
     let svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
     let genDistance = svgSize.height/23;
-
+    
     outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
-
+    
+    let pices = 50;
+    let redius = 100;
+    for(var i = 0; i < pices; i++){
+        outputSVG.appendChild(
+            createSVGElement('circle',{
+                "cx": (Math.cos((360/pices)*i)*redius)+150,
+                "cy": (Math.sin((360/pices)*i)*redius)+150,
+                "fill":"red",
+                "r": 2
+             })
+        );
+    }
+    outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
+/*
     Genres.forEach(function(genre,i){
         outputSVG.appendChild(
             createSVGElement('text',{
@@ -116,7 +130,7 @@
             })
         });
     });
-
+*/
     function createSVGElement(tag,attributes,content){
         let element = document.createElementNS("http://www.w3.org/2000/svg", tag);
         if(attributes != null){
