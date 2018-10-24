@@ -12,7 +12,8 @@
                 "x": 10,
                 "y": (20*(i))+20,
                 "class": "gen",
-                "data-genre":genre.Name
+                "data-genre":genre.Name,
+                "data-hover-genre":genre.Name
              },genre.Name)
         );
         outputSVG.appendChild(
@@ -23,16 +24,18 @@
                 "y2": (20*(i))+25,
                 "stroke":genre.color,
                 "class": "genUnderline",
-                "data-genre":genre.Name
+                "data-genre":genre.Name,
+                "data-hover-genre":genre.Name
              })
         );
         outputSVG.appendChild(
             createSVGElement('circle',{
-                "cx": 3,
+                "cx": 80,
                 "cy": (20*(i))+25,
                 "fill":genre.color,
                 "r": 3,
-                "data-genre":genre.Name
+                "data-genre":genre.Name,
+                "data-hover-genre":genre.Name
              })
         );
     });
@@ -75,6 +78,43 @@
             });
         });
     });
+
+    outputSVG.querySelectorAll('[data-hover-genre]').forEach(thisElement => {
+        thisElement.addEventListener('mouseover', function(){
+            outputSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
+                if(onOfElement.dataset.genre.includes(thisElement.dataset.hoverGenre)){
+                    onOfElement.style.opacity = 1;
+                } else {
+                    onOfElement.style.opacity = 0.2;
+                }
+            })
+        });
+
+        thisElement.addEventListener('mouseout', function(){
+            outputSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
+                onOfElement.style.opacity = 1;
+            })
+        });
+    });
+
+    outputSVG.querySelectorAll('[data-movie]').forEach(function(thisElement,i,allElements){
+        thisElement.addEventListener('mouseover', function(){
+            allElements.forEach(oneOfElement => {
+                if(thisElement.dataset.movie == oneOfElement.dataset.movie){
+                    oneOfElement.style.opacity = 1;
+                } else {
+                    oneOfElement.style.opacity = 0.025;
+                }
+            })
+        });
+
+        thisElement.addEventListener('mouseout', function(){
+            allElements.forEach(oneOfElement => {
+                oneOfElement.style.opacity = 1;
+            })
+        });
+    });
+
     function createSVGElement(tag,attributes,content){
         let element = document.createElementNS("http://www.w3.org/2000/svg", tag);
         if(attributes != null){

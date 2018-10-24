@@ -44,5 +44,7 @@ var moviesWithGenres = [];
 
     // Sort Genres By it's coming
     Genres = Genres.sort(function(a,b) { return b.count - a.count });
-    console.log(Genres);
+    moviesWithGenres = moviesWithGenres.sort(
+        function () { return Math.floor(Math.random()*3)-1; }
+    );
 })();
