@@ -1,40 +1,54 @@
 "use strict";
 (() => {
     
-    let outputSVG = document.querySelector("#outSVG");
-    let svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
-    let genDistance = svgSize.height/23;
-    
-    outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
-    
-    let pices = 80;
-    let redius = 100;
+    let cirInfoSVG = document.querySelector("#circularInfographic");
+    let linInfoSVG = document.querySelector("#linerInfographic");
+    let svgSize = { "width": 500, "height": 500 };
 
-    for(var i = 0; i < pices; i++){
-        outputSVG.appendChild(
+    let redius = 100;
+    let degree = 360;
+    let cirX = 250;
+    let cirY = 250
+    cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
+    moviesWithGenres.forEach(function(movie,i,allMovies){
+        cirInfoSVG.appendChild(
             createSVGElement('circle',{
-                "cx": (Math.cos((360/pices)*i * Math.PI / 180.0)*redius)+150,
-                "cy": (Math.sin((360/pices)*i * Math.PI / 180.0)*redius)+150,
+                "cx": (Math.cos((degree/allMovies.length)*i * Math.PI / 180.0)*redius)+cirX,
+                "cy": (Math.sin((degree/allMovies.length)*i * Math.PI / 180.0)*redius)+cirY,
                 "fill":"red",
                 "r": 2
              })
         );
-        outputSVG.appendChild(
+        cirInfoSVG.appendChild(
             createSVGElement('line',{
-                "x1": (Math.cos((360/pices)*i * Math.PI / 180.0)*redius)+150,
-                "y1": (Math.sin((360/pices)*i * Math.PI / 180.0)*redius)+150,
-                "x2": (Math.cos((360/pices)*i * Math.PI / 180.0)*(redius+25))+150,
-                "y2": (Math.sin((360/pices)*i * Math.PI / 180.0)*(redius+25))+150,
+                "x1": (Math.cos((degree/allMovies.length)*i * Math.PI / 180.0)*redius)+cirX,
+                "y1": (Math.sin((degree/allMovies.length)*i * Math.PI / 180.0)*redius)+cirY,
+                "x2": (Math.cos((degree/allMovies.length)*i * Math.PI / 180.0)*(redius-10))+cirX,
+                "y2": (Math.sin((degree/allMovies.length)*i * Math.PI / 180.0)*(redius-10))+cirY,
                 "stroke":"red",
+                "id":"tLine",
                 "class": "genUnderline",
              })
         );
-    }
+        cirInfoSVG.appendChild(
+            createSVGElement('text',{
+                "x": cirX+redius+5,
+                "y": cirY-0,
+                //"style":`transform: rotate(${((degree/allMovies.length)*i)}deg);`, 
+                "style":`transform: rotate(${((degree/allMovies.length)*i)}deg); transform-origin: ${cirX}px ${cirY}px`,
+                "class": "movName"
+             },movie.Name)
+        );
+    });
 
-/*
-    outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
+    svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
+
+    let genDistance = svgSize.height/23;
+    
+    linInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
+
     Genres.forEach(function(genre,i){
-        outputSVG.appendChild(
+        linInfoSVG.appendChild(
             createSVGElement('text',{
                 "x": 10,
                 "y": (genDistance*(i))+20,
@@ -43,7 +57,7 @@
                 "data-hover-genre":genre.Name
              },genre.Name)
         );
-        outputSVG.appendChild(
+        linInfoSVG.appendChild(
             createSVGElement('line',{
                 "x1": 3,
                 "y1": (genDistance*(i))+25,
@@ -55,7 +69,7 @@
                 "data-hover-genre":genre.Name
              })
         );
-        outputSVG.appendChild(
+        linInfoSVG.appendChild(
             createSVGElement('circle',{
                 "cx": 80,
                 "cy": (genDistance*(i))+25,
@@ -67,7 +81,7 @@
         );
     });
     moviesWithGenres.forEach(function(movie,i){
-        outputSVG.appendChild(
+        linInfoSVG.appendChild(
             createSVGElement('text',{
                 "x": svgSize.width-100,
                 "y": (8*(i))+10,
@@ -80,7 +94,7 @@
         movie.genres.forEach(function(thisGenre,thisI){
             Genres.forEach(function(genre,genI){
                 if(genre.Name == thisGenre){
-                    outputSVG.appendChild(
+                    linInfoSVG.appendChild(
                         createSVGElement('path',{
                             "d": `M ${(svgSize.width-105)-(thisI*5)},${(8*(i))+7.5} 
                                     C ${(svgSize.width-105)-80},${(8*(i))+7.5},
@@ -92,7 +106,7 @@
                             "class": "conntLine"
                          })
                     );
-                    outputSVG.appendChild(
+                    linInfoSVG.appendChild(
                         createSVGElement('circle',{
                             "cx": (svgSize.width-105)-(thisI*5),
                             "cy": (8*(i))+7.5,
@@ -107,9 +121,9 @@
         });
     });
 
-    outputSVG.querySelectorAll('[data-hover-genre]').forEach(thisElement => {
+    linInfoSVG.querySelectorAll('[data-hover-genre]').forEach(thisElement => {
         thisElement.addEventListener('mouseover', function(){
-            outputSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
+            linInfoSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
                 if(onOfElement.dataset.genre.includes(thisElement.dataset.hoverGenre)){
                     onOfElement.style.opacity = 1;
                 } else {
@@ -119,15 +133,15 @@
         });
 
         thisElement.addEventListener('mouseout', function(){
-            outputSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
+            linInfoSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
                 onOfElement.style.opacity = 1;
             })
         });
     });
 
-    outputSVG.querySelectorAll('[data-hover-movie]').forEach(function(thisElement,i,allElements){
+    linInfoSVG.querySelectorAll('[data-hover-movie]').forEach(function(thisElement,i,allElements){
         thisElement.addEventListener('mouseover', function(){
-            outputSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
+            linInfoSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
                 if(thisElement.dataset.hoverMovie == oneOfElement.dataset.movie){
                     oneOfElement.style.opacity = 1;
                 } else {
@@ -137,12 +151,12 @@
         });
 
         thisElement.addEventListener('mouseout', function(){
-            outputSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
+            linInfoSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
                 oneOfElement.style.opacity = 1;
             })
         });
     });
-*/
+
     function createSVGElement(tag,attributes,content){
         let element = document.createElementNS("http://www.w3.org/2000/svg", tag);
         if(attributes != null){
@@ -155,78 +169,5 @@
         }
         return element;
     }
-
-    // blueBalls.addEventListener("change", function(){
-
-    //     outputSVG.innerHTML = "";
-
-    //     let xRange = 200;
-    //     let yRange = 200;
-
-    //     let targetCircle = document.createElementNS(svgNS, 'circle');
-    //     Object.entries({
-    //         "cx":20,
-    //         "cy":(yRange/2),
-    //         "r":10,
-    //         "fill":"red"
-    //     }).forEach(([attrName, attrValue]) => {
-    //         targetCircle.setAttribute(attrName,attrValue);
-    //     });
-
-    //     let outCircles = [];
-    //     let outPaths = [];
-
-    //     for (let i = 0; i < this.value; i++) {
-
-    //         outCircles[i] = document.createElementNS(svgNS, 'circle');
-    //         Object.entries({
-    //             "cx":180,
-    //             "cy":(yRange/(parseInt(this.value)+1))*(i+1),
-    //             "r":10,
-    //             "fill":"blue"
-    //         }).forEach(([attrName, attrValue]) => {
-    //             outCircles[i].setAttribute(attrName,attrValue);
-    //         });
-
-    //         outPaths[i] = document.createElementNS(svgNS, 'path');
-    //         Object.entries({
-    //             "d":`M24 100 C 20 100, ${xRange/1.5} ${yRange/2}, 180 ${(yRange/(parseInt(this.value)+1))*(i+1)}`,
-    //             "fill":"transparent",
-    //             "stroke":"blue"
-    //         }).forEach(([attrName, attrValue]) => {
-    //             outPaths[i].setAttribute(attrName,attrValue);
-    //         });
-
-    //     }
-
-    //     outPaths.forEach(function(thisPath,index,allPaths){ 
-    //         thisPath.addEventListener('mouseover', function(){
-    //             allPaths.map(thisPath => thisPath.style.opacity = 0.2);
-    //             outCircles.map(thisCircle => thisCircle.style.opacity = 0.2);
-    //             thisPath.style.opacity = 1;
-    //             outCircles[index].style.opacity = 1;
-    //         });
-    //         thisPath.addEventListener('mouseout', function(){
-    //             allPaths.map(otherPaths => otherPaths.style.opacity = 1);
-    //             outCircles.map(thisCircle => thisCircle.style.opacity = 1);
-    //         });
-    //     });
-
-    //     outCircles.forEach(function(thisCircle,index,allCircles){ 
-    //         thisCircle.addEventListener('mouseover', function(){
-    //             allCircles.map(thisCircle => thisCircle.style.opacity = 0.2);
-    //             outPaths.map(thisPath => thisPath.style.opacity = 0.2);
-    //             thisCircle.style.opacity = 1;
-    //             outPaths[index].style.opacity = 1;
-    //         });
-    //         thisCircle.addEventListener('mouseout', function(){
-    //             allCircles.map(thisCircle => thisCircle.style.opacity = 1);
-    //             outPaths.map(thisPath => thisPath.style.opacity = 1);
-    //         });
-    //     });
-    //     outPaths.map(outPath => { outputSVG.appendChild(outPath); });
-    //     outCircles.map(outCircle => { outputSVG.appendChild(outCircle); });
-    //     outputSVG.appendChild(targetCircle);
-    // });
 
 })();
