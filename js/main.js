@@ -3,82 +3,26 @@
     
     let cirInfoSVG = document.querySelector("#circularInfographic");
     let linInfoSVG = document.querySelector("#linerInfographic");
-    let svgSize = { "width": 500, "height": 850 };
-
+    let svgSize = { "width": 600, "height": 600 };
+    
     cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
-
-    let redius = 150;
-    let degree = 270;
-    let offDegree = 182.5;
-    let cirX = 250;
-    let cirY = 250;
-    
-    moviesWithGenres.slice(0,(moviesWithGenres.length-1)/2).forEach(function(movie,i,allMovies){
-        cirInfoSVG.appendChild(
-            createSVGElement('circle',{
-                "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
-                "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
-                "fill":"red",
-                "r": 2
-             })
-        );
-        cirInfoSVG.appendChild(
-            createSVGElement('line',{
-                "x1": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
-                "y1": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
-                "x2": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirX,
-                "y2": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirY,
-                "stroke":"red",
-                "id":"tLine",
-                "class": "genUnderline",
-             })
-        );
-        cirInfoSVG.appendChild(
-            createSVGElement('text',{
-                "x": cirX+redius+5,
-                "y": cirY-0,
-                //"style":`transform: rotate(${((degree/allMovies.length)*i)}deg);`, 
-                "style":`transform: rotate(${((degree/allMovies.length)*i)+(offDegree)}deg); transform-origin: ${cirX}px ${cirY}px`,
-                "class": "movName"
-             },movie.Name)
-        );
-    });
-
-    redius = 150;
-    degree = 270;
-    offDegree = 0;
-    cirX = 250;
-    cirY = 550;
-    
-    moviesWithGenres.slice(((moviesWithGenres.length-1)/2),(moviesWithGenres.length-1)).forEach(function(movie,i,allMovies){
-        cirInfoSVG.appendChild(
-            createSVGElement('circle',{
-                "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
-                "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
-                "fill":"red",
-                "r": 2
-             })
-        );
-        cirInfoSVG.appendChild(
-            createSVGElement('line',{
-                "x1": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
-                "y1": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
-                "x2": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirX,
-                "y2": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirY,
-                "stroke":"red",
-                "id":"tLine",
-                "class": "genUnderline",
-             })
-        );
-        cirInfoSVG.appendChild(
-            createSVGElement('text',{
-                "x": cirX+redius+5,
-                "y": cirY-0,
-                //"style":`transform: rotate(${((degree/allMovies.length)*i)}deg);`, 
-                "style":`transform: rotate(${((degree/allMovies.length)*i)+(offDegree)}deg); transform-origin: ${cirX}px ${cirY}px`,
-                "class": "movName"
-             },movie.Name)
-        );
+    let flowerPer = { 
+        "fX":300,"fY":300,"fR":150,
+        "fDeg": 360,"fOffDeg": 0,
+        "leafs":5,
+        "lR":80,"lDeg":270,
+        "data":moviesWithGenres.slice(0)
+    };
+    var splitData = [];
+    for (let i = flowerPer.leafs; i > 0; i--) {
+        splitData.push(flowerPer.data.splice(0, Math.ceil(flowerPer.data.length / i)));
+    }
+    splitData.forEach(function(data,i){
+        // dataToCircle(SVG,data,cirX,cirY,radius,degree,offDegree)
+        dataToCircle(cirInfoSVG,data,
+            (Math.cos((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fX,
+            (Math.sin((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fY,
+            flowerPer.lR,flowerPer.lDeg,(360-flowerPer.lDeg));
     });
 
     svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
@@ -210,4 +154,35 @@
         return element;
     }
 
+    function dataToCircle(cirInfoSVG,datas,cirX,cirY,redius,degree,offDegree){
+        datas.forEach(function(thisData,i,allMovies){
+            cirInfoSVG.appendChild(
+                createSVGElement('circle',{
+                    "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
+                    "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
+                    "fill":"red",
+                    "r": 2
+                })
+            );
+            cirInfoSVG.appendChild(
+                createSVGElement('line',{
+                    "x1": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
+                    "y1": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
+                    "x2": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirX,
+                    "y2": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirY,
+                    "stroke":"red",
+                    "id":"tLine",
+                    "class": "genUnderline",
+                })
+            );
+            cirInfoSVG.appendChild(
+                createSVGElement('text',{
+                    "x": cirX+redius+5,
+                    "y": cirY-0,
+                    "style":`transform: rotate(${((degree/allMovies.length)*i)+(offDegree)}deg); transform-origin: ${cirX}px ${cirY}px`,
+                    "class": "movName"
+                },thisData.Name)
+            );
+        });
+    }
 })();
