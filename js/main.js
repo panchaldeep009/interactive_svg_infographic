@@ -4,13 +4,14 @@
     let cirInfoSVG = document.querySelector("#circularInfographic");
     let linInfoSVG = document.querySelector("#linerInfographic");
     let svgSize = { "width": 600, "height": 600 };
-    
+
+    cirInfoSVG.innerHTML = "";
     cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
     let flowerPer = { 
-        "fX":300,"fY":300,"fR":150,
-        "fDeg": 360,"fOffDeg": 0,
+        "fX":300,"fY":300,"fR":200,
+        "fDeg": 360,"fOffDeg": -10,
         "leafs":5,
-        "lR":80,"lDeg":270,
+        "lR":60,"lDeg":270,
         "data":moviesWithGenres.slice(0)
     };
     var splitData = [];
@@ -18,11 +19,12 @@
         splitData.push(flowerPer.data.splice(0, Math.ceil(flowerPer.data.length / i)));
     }
     splitData.forEach(function(data,i){
+
         // dataToCircle(SVG,data,cirX,cirY,radius,degree,offDegree)
         dataToCircle(cirInfoSVG,data,
             (Math.cos((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fX,
             (Math.sin((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fY,
-            flowerPer.lR,flowerPer.lDeg,(360-flowerPer.lDeg));
+            flowerPer.lR,flowerPer.lDeg,flowerPer.fOffDeg+(flowerPer.lDeg-45)+((flowerPer.fDeg/flowerPer.leafs)*i)+5);
     });
 
     svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
@@ -181,7 +183,7 @@
                     "y": cirY-0,
                     "style":`transform: rotate(${((degree/allMovies.length)*i)+(offDegree)}deg); transform-origin: ${cirX}px ${cirY}px`,
                     "class": "movName"
-                },thisData.Name)
+                }, thisData.Name.length > 18 ? thisData.Name.substr(0,15)+" .." : thisData.Name)
             );
         });
     }
