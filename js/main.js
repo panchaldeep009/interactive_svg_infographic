@@ -46,6 +46,7 @@
                 "y": (8*(i))+10,
                 "class": "movName",
                 "data-genre":movie.genres.toString(),
+                "data-hover-movie":movie.Name,
                 "data-movie":movie.Name
              },movie.Name)
         );
@@ -97,10 +98,10 @@
         });
     });
 
-    outputSVG.querySelectorAll('[data-movie]').forEach(function(thisElement,i,allElements){
+    outputSVG.querySelectorAll('[data-hover-movie]').forEach(function(thisElement,i,allElements){
         thisElement.addEventListener('mouseover', function(){
-            allElements.forEach(oneOfElement => {
-                if(thisElement.dataset.movie == oneOfElement.dataset.movie){
+            outputSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
+                if(thisElement.dataset.hoverMovie == oneOfElement.dataset.movie){
                     oneOfElement.style.opacity = 1;
                 } else {
                     oneOfElement.style.opacity = 0.025;
@@ -109,7 +110,7 @@
         });
 
         thisElement.addEventListener('mouseout', function(){
-            allElements.forEach(oneOfElement => {
+            outputSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
                 oneOfElement.style.opacity = 1;
             })
         });

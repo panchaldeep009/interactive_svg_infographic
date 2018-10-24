@@ -16,7 +16,6 @@ body{
     overflow-x: hidden;
 }
 .gen { 
-    cursor: pointer;
     font: normal 10px sans-serif;
     fill: #FFF;
 }
@@ -25,7 +24,9 @@ body{
     fill: transparent;
 }
 .movName{
-    cursor: pointer;
     font: normal 6.5px sans-serif;
     fill: #FFF;
+}
+[data-hover-movie],[data-hover-genre]{
+    cursor: pointer;
 }
