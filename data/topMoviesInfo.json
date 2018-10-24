@@ -1,0 +1,1612 @@
+[
+ {
+   "id": 1,
+   "name": "Avatar",
+   "genre": "action",
+   "year": 2009,
+   "imdb_rating": 7.9
+ },
+ {
+   "id": 2,
+   "name": "Jurassic World",
+   "genre": "action",
+   "year": 2015,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 3,
+   "name": "The Avengers",
+   "genre": "action",
+   "year": 2012,
+   "imdb_rating": 8.1
+ },
+ {
+   "id": 4,
+   "name": "The Dark Knight",
+   "genre": "action",
+   "year": 2008,
+   "imdb_rating": 9
+ },
+ {
+   "id": 5,
+   "name": "Star Wars: Episode I - The Phantom Menace",
+   "genre": "action",
+   "year": 1999,
+   "imdb_rating": 6.6
+ },
+ {
+   "id": 6,
+   "name": "Star Wars",
+   "genre": "action",
+   "year": 1977,
+   "imdb_rating": 8.7
+ },
+ {
+   "id": 7,
+   "name": "Avengers: Age of Ultron",
+   "genre": "action",
+   "year": 2015,
+   "imdb_rating": 7.9
+ },
+ {
+   "id": 8,
+   "name": "The Dark Knight Rises",
+   "genre": "action",
+   "year": 2012,
+   "imdb_rating": 8.5
+ },
+ {
+   "id": 9,
+   "name": "Pirates of the Caribbean: Dead Mans Chest",
+   "genre": "action",
+   "year": 2006,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 10,
+   "name": "Iron Man 3",
+   "genre": "action",
+   "year": 2013,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 11,
+   "name": "Spider-Man",
+   "genre": "action",
+   "year": 2002,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 12,
+   "name": "Transformers: Revenge of the Fallen",
+   "genre": "action",
+   "year": 2009,
+   "imdb_rating": 6
+ },
+ {
+   "id": 13,
+   "name": "Star Wars: Episode III - Revenge of the Sith",
+   "genre": "action",
+   "year": 2005,
+   "imdb_rating": 7.7
+ },
+ {
+   "id": 14,
+   "name": "Spider-Man 2",
+   "genre": "action",
+   "year": 2004,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 15,
+   "name": "Transformers: Dark of the Moon",
+   "genre": "action",
+   "year": 2011,
+   "imdb_rating": 6.3
+ },
+ {
+   "id": 16,
+   "name": "American Sniper",
+   "genre": "action",
+   "year": 2014,
+   "imdb_rating": 7.4
+ },
+ {
+   "id": 17,
+   "name": "Furious Seven",
+   "genre": "action",
+   "year": 2015,
+   "imdb_rating": 7.4
+ },
+ {
+   "id": 18,
+   "name": "Spider-Man 3",
+   "genre": "action",
+   "year": 2007,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 19,
+   "name": "Guardians of the Galaxy",
+   "genre": "action",
+   "year": 2014,
+   "imdb_rating": 8.1
+ },
+ {
+   "id": 20,
+   "name": "Transformers",
+   "genre": "action",
+   "year": 2007,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 21,
+   "name": "Iron Man",
+   "genre": "action",
+   "year": 2008,
+   "imdb_rating": 7.9
+ },
+ {
+   "id": 22,
+   "name": "Indiana Jones and the Kingdom of the Crystal Skull",
+   "genre": "action",
+   "year": 2008,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 23,
+   "name": "Iron Man 2",
+   "genre": "action",
+   "year": 2010,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 24,
+   "name": "Star Wars: Episode II - Attack of the Clones",
+   "genre": "action",
+   "year": 2002,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 25,
+   "name": "Pirates of the Caribbean: At Worlds End",
+   "genre": "action",
+   "year": 2007,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 26,
+   "name": "Star Wars: Episode VI - Return of the Jedi",
+   "genre": "action",
+   "year": 1983,
+   "imdb_rating": 8.4
+ },
+ {
+   "id": 27,
+   "name": "Independence Day",
+   "genre": "action",
+   "year": 1996,
+   "imdb_rating": 6.9
+ },
+ {
+   "id": 28,
+   "name": "Pirates of the Caribbean: The Curse of the Black Pearl",
+   "genre": "action",
+   "year": 2003,
+   "imdb_rating": 8.1
+ },
+ {
+   "id": 29,
+   "name": "Skyfall",
+   "genre": "action",
+   "year": 2012,
+   "imdb_rating": 7.8
+ },
+ {
+   "id": 30,
+   "name": "Inception",
+   "genre": "action",
+   "year": 2010,
+   "imdb_rating": 8.8
+ },
+ {
+   "id": 31,
+   "name": "Man of Steel",
+   "genre": "action",
+   "year": 2013,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 32,
+   "name": "Star Wars: Episode V - The Empire Strikes Back",
+   "genre": "action",
+   "year": 1980,
+   "imdb_rating": 8.8
+ },
+ {
+   "id": 33,
+   "name": "The Matrix Reloaded",
+   "genre": "action",
+   "year": 2003,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 34,
+   "name": "The Amazing Spider-Man",
+   "genre": "action",
+   "year": 2012,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 35,
+   "name": "The Incredibles",
+   "genre": "action",
+   "year": 2004,
+   "imdb_rating": 8
+ },
+ {
+   "id": 36,
+   "name": "Captain America: The Winter Soldier",
+   "genre": "action",
+   "year": 2014,
+   "imdb_rating": 7.8
+ },
+ {
+   "id": 37,
+   "name": "The Lego Movie",
+   "genre": "action",
+   "year": 2014,
+   "imdb_rating": 7.8
+ },
+ {
+   "id": 38,
+   "name": "Star Trek",
+   "genre": "action",
+   "year": 2009,
+   "imdb_rating": 8
+ },
+ {
+   "id": 39,
+   "name": "Batman",
+   "genre": "action",
+   "year": 1989,
+   "imdb_rating": 7.6
+ },
+ {
+   "id": 40,
+   "name": "Night at the Museum",
+   "genre": "action",
+   "year": 2006,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 41,
+   "name": "Transformers: Age of Extinction",
+   "genre": "action",
+   "year": 2014,
+   "imdb_rating": 5.8
+ },
+ {
+   "id": 42,
+   "name": "Twister",
+   "genre": "action",
+   "year": 1996,
+   "imdb_rating": 6.3
+ },
+ {
+   "id": 43,
+   "name": "Maleficent",
+   "genre": "action",
+   "year": 2014,
+   "imdb_rating": 7
+ },
+ {
+   "id": 44,
+   "name": "Pirates of the Caribbean: On Stranger Tides",
+   "genre": "action",
+   "year": 2011,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 45,
+   "name": "Fast & Furious 6",
+   "genre": "action",
+   "year": 2013,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 46,
+   "name": "Beverly Hills Cop",
+   "genre": "action",
+   "year": 1984,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 47,
+   "name": "X-Men: The Last Stand",
+   "genre": "action",
+   "year": 2006,
+   "imdb_rating": 6.8
+ },
+ {
+   "id": 48,
+   "name": "X-Men: Days of Future Past",
+   "genre": "action",
+   "year": 2014,
+   "imdb_rating": 8.1
+ },
+ {
+   "id": 49,
+   "name": "The Lost World: Jurassic Park",
+   "genre": "action",
+   "year": 1997,
+   "imdb_rating": 6.5
+ },
+ {
+   "id": 50,
+   "name": "Star Trek Into Darkness",
+   "genre": "action",
+   "year": 2013,
+   "imdb_rating": 7.8
+ },
+ {
+   "id": 51,
+   "name": "Shrek 2",
+   "genre": "comedy",
+   "year": 2004,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 52,
+   "name": "Toy Story 3",
+   "genre": "comedy",
+   "year": 2010,
+   "imdb_rating": 8.4
+ },
+ {
+   "id": 53,
+   "name": "Frozen",
+   "genre": "comedy",
+   "year": 2013,
+   "imdb_rating": 7.6
+ },
+ {
+   "id": 54,
+   "name": "Finding Nemo",
+   "genre": "comedy",
+   "year": 2003,
+   "imdb_rating": 8.2
+ },
+ {
+   "id": 55,
+   "name": "Despicable Me 2",
+   "genre": "comedy",
+   "year": 2013,
+   "imdb_rating": 7.5
+ },
+ {
+   "id": 56,
+   "name": "Inside Out",
+   "genre": "comedy",
+   "year": 2015,
+   "imdb_rating": 8.6
+ },
+ {
+   "id": 57,
+   "name": "Shrek the Third",
+   "genre": "comedy",
+   "year": 2007,
+   "imdb_rating": 6
+ },
+ {
+   "id": 58,
+   "name": "Minions",
+   "genre": "comedy",
+   "year": 2015,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 59,
+   "name": "Up",
+   "genre": "comedy",
+   "year": 2009,
+   "imdb_rating": 8.3
+ },
+ {
+   "id": 60,
+   "name": "Monsters, Inc.",
+   "genre": "comedy",
+   "year": 2001,
+   "imdb_rating": 8.1
+ },
+ {
+   "id": 61,
+   "name": "Home Alone",
+   "genre": "comedy",
+   "year": 1990,
+   "imdb_rating": 7.4
+ },
+ {
+   "id": 62,
+   "name": "Meet the Fockers",
+   "genre": "comedy",
+   "year": 2004,
+   "imdb_rating": 6.3
+ },
+ {
+   "id": 63,
+   "name": "The Hangover",
+   "genre": "comedy",
+   "year": 2009,
+   "imdb_rating": 7.8
+ },
+ {
+   "id": 64,
+   "name": "Monsters University",
+   "genre": "comedy",
+   "year": 2013,
+   "imdb_rating": 7.4
+ },
+ {
+   "id": 65,
+   "name": "Shrek",
+   "genre": "comedy",
+   "year": 2001,
+   "imdb_rating": 7.9
+ },
+ {
+   "id": 66,
+   "name": "How the Grinch Stole Christmas",
+   "genre": "comedy",
+   "year": 2000,
+   "imdb_rating": 6
+ },
+ {
+   "id": 67,
+   "name": "The Hangover Part II",
+   "genre": "comedy",
+   "year": 2011,
+   "imdb_rating": 6.5
+ },
+ {
+   "id": 68,
+   "name": "Despicable Me",
+   "genre": "comedy",
+   "year": 2010,
+   "imdb_rating": 7.7
+ },
+ {
+   "id": 69,
+   "name": "Men in Black",
+   "genre": "comedy",
+   "year": 1997,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 70,
+   "name": "Toy Story 2",
+   "genre": "comedy",
+   "year": 1999,
+   "imdb_rating": 7.9
+ },
+ {
+   "id": 71,
+   "name": "Cars",
+   "genre": "comedy",
+   "year": 2006,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 72,
+   "name": "Bruce Almighty",
+   "genre": "comedy",
+   "year": 2003,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 73,
+   "name": "My Big Fat Greek Wedding",
+   "genre": "comedy",
+   "year": 2002,
+   "imdb_rating": 6.6
+ },
+ {
+   "id": 74,
+   "name": "Shrek Forever After",
+   "genre": "comedy",
+   "year": 2010,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 75,
+   "name": "Brave",
+   "genre": "comedy",
+   "year": 2012,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 76,
+   "name": "Ghostbusters",
+   "genre": "comedy",
+   "year": 1984,
+   "imdb_rating": 7.8
+ },
+ {
+   "id": 77,
+   "name": "Rush Hour 2",
+   "genre": "comedy",
+   "year": 2001,
+   "imdb_rating": 6.6
+ },
+ {
+   "id": 78,
+   "name": "Big Hero 6",
+   "genre": "comedy",
+   "year": 2014,
+   "imdb_rating": 7.9
+ },
+ {
+   "id": 79,
+   "name": "Alvin and the Chipmunks: The Squeakquel",
+   "genre": "comedy",
+   "year": 2009,
+   "imdb_rating": 4.4
+ },
+ {
+   "id": 80,
+   "name": "Mrs. Doubtfire",
+   "genre": "comedy",
+   "year": 1993,
+   "imdb_rating": 6.9
+ },
+ {
+   "id": 81,
+   "name": "Ted",
+   "genre": "comedy",
+   "year": 2012,
+   "imdb_rating": 7
+ },
+ {
+   "id": 82,
+   "name": "Aladdin",
+   "genre": "comedy",
+   "year": 1992,
+   "imdb_rating": 8
+ },
+ {
+   "id": 83,
+   "name": "Alvin and the Chipmunks",
+   "genre": "comedy",
+   "year": 2007,
+   "imdb_rating": 5.3
+ },
+ {
+   "id": 84,
+   "name": "Madagascar 3: Europes Most Wanted",
+   "genre": "comedy",
+   "year": 2012,
+   "imdb_rating": 7
+ },
+ {
+   "id": 85,
+   "name": "Kung Fu Panda",
+   "genre": "comedy",
+   "year": 2008,
+   "imdb_rating": 7.6
+ },
+ {
+   "id": 86,
+   "name": "The Lorax",
+   "genre": "comedy",
+   "year": 2012,
+   "imdb_rating": 6.5
+ },
+ {
+   "id": 87,
+   "name": "Austin Powers in Goldmember",
+   "genre": "comedy",
+   "year": 2002,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 88,
+   "name": "Back to the Future",
+   "genre": "comedy",
+   "year": 1985,
+   "imdb_rating": 8.5
+ },
+ {
+   "id": 89,
+   "name": "Wedding Crashers",
+   "genre": "comedy",
+   "year": 2005,
+   "imdb_rating": 7
+ },
+ {
+   "id": 90,
+   "name": "Charlie and the Chocolate Factory",
+   "genre": "comedy",
+   "year": 2005,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 91,
+   "name": "Ratatouille",
+   "genre": "comedy",
+   "year": 2007,
+   "imdb_rating": 8
+ },
+ {
+   "id": 92,
+   "name": "Austin Powers: The Spy Who Shagged Me",
+   "genre": "comedy",
+   "year": 1999,
+   "imdb_rating": 6.6
+ },
+ {
+   "id": 93,
+   "name": "Tangled",
+   "genre": "comedy",
+   "year": 2010,
+   "imdb_rating": 7.8
+ },
+ {
+   "id": 94,
+   "name": "Monsters vs. Aliens",
+   "genre": "comedy",
+   "year": 2009,
+   "imdb_rating": 6.6
+ },
+ {
+   "id": 95,
+   "name": "Happy Feet",
+   "genre": "comedy",
+   "year": 2006,
+   "imdb_rating": 6.5
+ },
+ {
+   "id": 96,
+   "name": "Ice Age: Dawn of the Dinosaurs",
+   "genre": "comedy",
+   "year": 2009,
+   "imdb_rating": 7
+ },
+ {
+   "id": 97,
+   "name": "Ice Age: The Meltdown",
+   "genre": "comedy",
+   "year": 2006,
+   "imdb_rating": 6.9
+ },
+ {
+   "id": 98,
+   "name": "World War Z",
+   "genre": "horror",
+   "year": 2013,
+   "imdb_rating": 7
+ },
+ {
+   "id": 99,
+   "name": "What Lies Beneath",
+   "genre": "horror",
+   "year": 2000,
+   "imdb_rating": 6.6
+ },
+ {
+   "id": 100,
+   "name": "Gremlins",
+   "genre": "horror",
+   "year": 1984,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 101,
+   "name": "The Blair Witch Project",
+   "genre": "horror",
+   "year": 1999,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 102,
+   "name": "The Conjuring",
+   "genre": "horror",
+   "year": 2013,
+   "imdb_rating": 7.5
+ },
+ {
+   "id": 103,
+   "name": "The Ring",
+   "genre": "horror",
+   "year": 2002,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 104,
+   "name": "The Grudge",
+   "genre": "horror",
+   "year": 2004,
+   "imdb_rating": 5.9
+ },
+ {
+   "id": 105,
+   "name": "Paranormal Activity",
+   "genre": "horror",
+   "year": 2007,
+   "imdb_rating": 6.3
+ },
+ {
+   "id": 106,
+   "name": "Interview with the Vampire: The Vampire Chronicles",
+   "genre": "horror",
+   "year": 1994,
+   "imdb_rating": 7.6
+ },
+ {
+   "id": 107,
+   "name": "Paranormal Activity 3",
+   "genre": "horror",
+   "year": 2011,
+   "imdb_rating": 5.9
+ },
+ {
+   "id": 108,
+   "name": "Scream",
+   "genre": "horror",
+   "year": 1996,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 109,
+   "name": "Jaws 2",
+   "genre": "horror",
+   "year": 1978,
+   "imdb_rating": 5.7
+ },
+ {
+   "id": 110,
+   "name": "Scream 2",
+   "genre": "horror",
+   "year": 1997,
+   "imdb_rating": 6.1
+ },
+ {
+   "id": 111,
+   "name": "Sleepy Hollow",
+   "genre": "horror",
+   "year": 1999,
+   "imdb_rating": 7.4
+ },
+ {
+   "id": 112,
+   "name": "The Others",
+   "genre": "horror",
+   "year": 2001,
+   "imdb_rating": 7.6
+ },
+ {
+   "id": 113,
+   "name": "The Haunting",
+   "genre": "horror",
+   "year": 1999,
+   "imdb_rating": 4.9
+ },
+ {
+   "id": 114,
+   "name": "Scream 3",
+   "genre": "horror",
+   "year": 2000,
+   "imdb_rating": 5.5
+ },
+ {
+   "id": 115,
+   "name": "Saw II",
+   "genre": "horror",
+   "year": 2005,
+   "imdb_rating": 6.6
+ },
+ {
+   "id": 116,
+   "name": "The Amityville Horror",
+   "genre": "horror",
+   "year": 1979,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 117,
+   "name": "Aliens",
+   "genre": "horror",
+   "year": 1986,
+   "imdb_rating": 8.4
+ },
+ {
+   "id": 118,
+   "name": "Paranormal Activity 2",
+   "genre": "horror",
+   "year": 2010,
+   "imdb_rating": 5.7
+ },
+ {
+   "id": 119,
+   "name": "Annabelle",
+   "genre": "horror",
+   "year": 2014,
+   "imdb_rating": 5.4
+ },
+ {
+   "id": 120,
+   "name": "Scooby-Doo 2: Monsters Unleashed",
+   "genre": "horror",
+   "year": 2004,
+   "imdb_rating": 4.9
+ },
+ {
+   "id": 121,
+   "name": "Insidious: Chapter 2",
+   "genre": "horror",
+   "year": 2013,
+   "imdb_rating": 6.6
+ },
+ {
+   "id": 122,
+   "name": "Dracula",
+   "genre": "horror",
+   "year": 1992,
+   "imdb_rating": 7.5
+ },
+ {
+   "id": 123,
+   "name": "Freddy vs. Jason",
+   "genre": "horror",
+   "year": 2003,
+   "imdb_rating": 5.8
+ },
+ {
+   "id": 124,
+   "name": "Blade II",
+   "genre": "horror",
+   "year": 2002,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 125,
+   "name": "Saw III",
+   "genre": "horror",
+   "year": 2006,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 126,
+   "name": "The Texas Chainsaw Massacre",
+   "genre": "horror",
+   "year": 2003,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 127,
+   "name": "Cloverfield",
+   "genre": "horror",
+   "year": 2008,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 128,
+   "name": "Dark Shadows",
+   "genre": "horror",
+   "year": 2012,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 129,
+   "name": "The Ring Two",
+   "genre": "horror",
+   "year": 2005,
+   "imdb_rating": 5.4
+ },
+ {
+   "id": 130,
+   "name": "Zombieland",
+   "genre": "horror",
+   "year": 2009,
+   "imdb_rating": 7.7
+ },
+ {
+   "id": 131,
+   "name": "Constantine",
+   "genre": "horror",
+   "year": 2005,
+   "imdb_rating": 6.9
+ },
+ {
+   "id": 132,
+   "name": "The Exorcism of Emily Rose",
+   "genre": "horror",
+   "year": 2005,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 133,
+   "name": "I Know What You Did Last Summer",
+   "genre": "horror",
+   "year": 1997,
+   "imdb_rating": 5.6
+ },
+ {
+   "id": 134,
+   "name": "1408",
+   "genre": "horror",
+   "year": 2007,
+   "imdb_rating": 6.8
+ },
+ {
+   "id": 135,
+   "name": "Mama",
+   "genre": "horror",
+   "year": 2013,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 136,
+   "name": "The Purge: Anarchy",
+   "genre": "horror",
+   "year": 2014,
+   "imdb_rating": 6.5
+ },
+ {
+   "id": 137,
+   "name": "Scary Movie 2",
+   "genre": "horror",
+   "year": 2001,
+   "imdb_rating": 5.2
+ },
+ {
+   "id": 138,
+   "name": "Blade",
+   "genre": "horror",
+   "year": 1998,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 139,
+   "name": "End of Days",
+   "genre": "horror",
+   "year": 1999,
+   "imdb_rating": 5.7
+ },
+ {
+   "id": 140,
+   "name": "The Forgotten",
+   "genre": "horror",
+   "year": 2004,
+   "imdb_rating": 5.8
+ },
+ {
+   "id": 141,
+   "name": "The Final Destination",
+   "genre": "horror",
+   "year": 2009,
+   "imdb_rating": 5.2
+ },
+ {
+   "id": 142,
+   "name": "Warm Bodies",
+   "genre": "horror",
+   "year": 2013,
+   "imdb_rating": 6.9
+ },
+ {
+   "id": 143,
+   "name": "Anaconda",
+   "genre": "horror",
+   "year": 1997,
+   "imdb_rating": 4.6
+ },
+ {
+   "id": 144,
+   "name": "Wolf",
+   "genre": "horror",
+   "year": 1994,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 145,
+   "name": "Friday the 13th",
+   "genre": "horror",
+   "year": 2009,
+   "imdb_rating": 5.6
+ },
+ {
+   "id": 146,
+   "name": "The Purge",
+   "genre": "horror",
+   "year": 2013,
+   "imdb_rating": 5.6
+ },
+ {
+   "id": 147,
+   "name": "Titanic",
+   "genre": "romance",
+   "year": 1997,
+   "imdb_rating": 7.7
+ },
+ {
+   "id": 148,
+   "name": "Forrest Gump",
+   "genre": "romance",
+   "year": 1994,
+   "imdb_rating": 8.8
+ },
+ {
+   "id": 149,
+   "name": "The Twilight Saga: Eclipse",
+   "genre": "romance",
+   "year": 2010,
+   "imdb_rating": 4.9
+ },
+ {
+   "id": 150,
+   "name": "The Twilight Saga: New Moon",
+   "genre": "romance",
+   "year": 2009,
+   "imdb_rating": 4.6
+ },
+ {
+   "id": 151,
+   "name": "The Twilight Saga: Breaking Dawn - Part 2",
+   "genre": "romance",
+   "year": 2012,
+   "imdb_rating": 5.6
+ },
+ {
+   "id": 152,
+   "name": "The Twilight Saga: Breaking Dawn - Part 1",
+   "genre": "romance",
+   "year": 2011,
+   "imdb_rating": 4.9
+ },
+ {
+   "id": 153,
+   "name": "Beauty and the Beast",
+   "genre": "romance",
+   "year": 1991,
+   "imdb_rating": 8
+ },
+ {
+   "id": 154,
+   "name": "King Kong",
+   "genre": "romance",
+   "year": 2005,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 155,
+   "name": "Ghost",
+   "genre": "romance",
+   "year": 1990,
+   "imdb_rating": 7
+ },
+ {
+   "id": 156,
+   "name": "Cinderella",
+   "genre": "romance",
+   "year": 2015,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 157,
+   "name": "Gone with the Wind",
+   "genre": "romance",
+   "year": 1939,
+   "imdb_rating": 8.2
+ },
+ {
+   "id": 158,
+   "name": "Pearl Harbor",
+   "genre": "romance",
+   "year": 2001,
+   "imdb_rating": 6
+ },
+ {
+   "id": 159,
+   "name": "Twilight",
+   "genre": "romance",
+   "year": 2008,
+   "imdb_rating": 5.2
+ },
+ {
+   "id": 160,
+   "name": "Mr. & Mrs. Smith",
+   "genre": "romance",
+   "year": 2005,
+   "imdb_rating": 6.5
+ },
+ {
+   "id": 161,
+   "name": "Snow White and the Seven Dwarfs",
+   "genre": "romance",
+   "year": 1937,
+   "imdb_rating": 7.7
+ },
+ {
+   "id": 162,
+   "name": "What Women Want",
+   "genre": "romance",
+   "year": 2000,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 163,
+   "name": "Top Gun",
+   "genre": "romance",
+   "year": 1986,
+   "imdb_rating": 6.8
+ },
+ {
+   "id": 164,
+   "name": "Pretty Woman",
+   "genre": "romance",
+   "year": 1990,
+   "imdb_rating": 6.9
+ },
+ {
+   "id": 165,
+   "name": "Hitch",
+   "genre": "romance",
+   "year": 2005,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 166,
+   "name": "Tootsie",
+   "genre": "romance",
+   "year": 1982,
+   "imdb_rating": 7.4
+ },
+ {
+   "id": 167,
+   "name": "Theres Something About Mary",
+   "genre": "romance",
+   "year": 1998,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 168,
+   "name": "Elf",
+   "genre": "romance",
+   "year": 2003,
+   "imdb_rating": 6.9
+ },
+ {
+   "id": 169,
+   "name": "Tarzan",
+   "genre": "romance",
+   "year": 1999,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 170,
+   "name": "Bridesmaids",
+   "genre": "romance",
+   "year": 2011,
+   "imdb_rating": 6.8
+ },
+ {
+   "id": 171,
+   "name": "Fifty Shades of Grey",
+   "genre": "romance",
+   "year": 2015,
+   "imdb_rating": 4.2
+ },
+ {
+   "id": 172,
+   "name": "Robin Hood: Prince of Thieves",
+   "genre": "romance",
+   "year": 1991,
+   "imdb_rating": 6.9
+ },
+ {
+   "id": 173,
+   "name": "The Proposal",
+   "genre": "romance",
+   "year": 2009,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 174,
+   "name": "The Sound of Music",
+   "genre": "romance",
+   "year": 1965,
+   "imdb_rating": 8
+ },
+ {
+   "id": 175,
+   "name": "Jerry Maguire",
+   "genre": "romance",
+   "year": 1996,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 176,
+   "name": "Sex and the City",
+   "genre": "romance",
+   "year": 2008,
+   "imdb_rating": 5.5
+ },
+ {
+   "id": 177,
+   "name": "Runaway Bride",
+   "genre": "romance",
+   "year": 1999,
+   "imdb_rating": 5.4
+ },
+ {
+   "id": 178,
+   "name": "Les Misérables",
+   "genre": "romance",
+   "year": 2012,
+   "imdb_rating": 7.6
+ },
+ {
+   "id": 179,
+   "name": "Knocked Up",
+   "genre": "romance",
+   "year": 2007,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 180,
+   "name": "Little Fockers",
+   "genre": "romance",
+   "year": 2010,
+   "imdb_rating": 5.5
+ },
+ {
+   "id": 181,
+   "name": "As Good as It Gets",
+   "genre": "romance",
+   "year": 1997,
+   "imdb_rating": 7.8
+ },
+ {
+   "id": 182,
+   "name": "American Pie 2",
+   "genre": "romance",
+   "year": 2001,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 183,
+   "name": "The Great Gatsby",
+   "genre": "romance",
+   "year": 2013,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 184,
+   "name": "Mamma Mia!",
+   "genre": "romance",
+   "year": 2008,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 185,
+   "name": "Juno",
+   "genre": "romance",
+   "year": 2007,
+   "imdb_rating": 7.5
+ },
+ {
+   "id": 186,
+   "name": "Marley & Me",
+   "genre": "romance",
+   "year": 2008,
+   "imdb_rating": 7.1
+ },
+ {
+   "id": 187,
+   "name": "Pocahontas",
+   "genre": "romance",
+   "year": 1995,
+   "imdb_rating": 6.6
+ },
+ {
+   "id": 188,
+   "name": "Slumdog Millionaire",
+   "genre": "romance",
+   "year": 2008,
+   "imdb_rating": 8
+ },
+ {
+   "id": 189,
+   "name": "Look Whos Talking",
+   "genre": "romance",
+   "year": 1989,
+   "imdb_rating": 5.8
+ },
+ {
+   "id": 190,
+   "name": "Click",
+   "genre": "romance",
+   "year": 2006,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 191,
+   "name": "The Lion King",
+   "genre": "drama",
+   "year": 1994,
+   "imdb_rating": 8.5
+ },
+ {
+   "id": 192,
+   "name": "Harry Potter and the Deathly Hallows: Part 2",
+   "genre": "drama",
+   "year": 2011,
+   "imdb_rating": 8.1
+ },
+ {
+   "id": 193,
+   "name": "The Sixth Sense",
+   "genre": "drama",
+   "year": 1999,
+   "imdb_rating": 8.2
+ },
+ {
+   "id": 194,
+   "name": "Jaws",
+   "genre": "drama",
+   "year": 1975,
+   "imdb_rating": 8.1
+ },
+ {
+   "id": 195,
+   "name": "I Am Legend",
+   "genre": "drama",
+   "year": 2007,
+   "imdb_rating": 7.2
+ },
+ {
+   "id": 196,
+   "name": "The Blind Side",
+   "genre": "drama",
+   "year": 2009,
+   "imdb_rating": 7.7
+ },
+ {
+   "id": 197,
+   "name": "Cast Away",
+   "genre": "drama",
+   "year": 2000,
+   "imdb_rating": 7.7
+ },
+ {
+   "id": 198,
+   "name": "Signs",
+   "genre": "drama",
+   "year": 2002,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 199,
+   "name": "Saving Private Ryan",
+   "genre": "drama",
+   "year": 1998,
+   "imdb_rating": 8.6
+ },
+ {
+   "id": 200,
+   "name": "Dawn of the Planet of the Apes",
+   "genre": "drama",
+   "year": 2014,
+   "imdb_rating": 7.7
+ },
+ {
+   "id": 201,
+   "name": "Interstellar",
+   "genre": "drama",
+   "year": 2014,
+   "imdb_rating": 8.7
+ },
+ {
+   "id": 202,
+   "name": "Gladiator",
+   "genre": "drama",
+   "year": 2000,
+   "imdb_rating": 8.5
+ },
+ {
+   "id": 203,
+   "name": "Dances with Wolves",
+   "genre": "drama",
+   "year": 1990,
+   "imdb_rating": 8
+ },
+ {
+   "id": 204,
+   "name": "The Perfect Storm",
+   "genre": "drama",
+   "year": 2000,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 205,
+   "name": "Lincoln",
+   "genre": "drama",
+   "year": 2012,
+   "imdb_rating": 7.4
+ },
+ {
+   "id": 206,
+   "name": "Rise of the Planet of the Apes",
+   "genre": "drama",
+   "year": 2011,
+   "imdb_rating": 7.6
+ },
+ {
+   "id": 207,
+   "name": "The Karate Kid",
+   "genre": "drama",
+   "year": 2010,
+   "imdb_rating": 6.2
+ },
+ {
+   "id": 208,
+   "name": "Rain Man",
+   "genre": "drama",
+   "year": 1988,
+   "imdb_rating": 8
+ },
+ {
+   "id": 209,
+   "name": "Air Force One",
+   "genre": "drama",
+   "year": 1997,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 210,
+   "name": "True Grit",
+   "genre": "drama",
+   "year": 2010,
+   "imdb_rating": 7.7
+ },
+ {
+   "id": 211,
+   "name": "A Beautiful Mind",
+   "genre": "drama",
+   "year": 2001,
+   "imdb_rating": 8.2
+ },
+ {
+   "id": 212,
+   "name": "The Help",
+   "genre": "drama",
+   "year": 2011,
+   "imdb_rating": 8.1
+ },
+ {
+   "id": 213,
+   "name": "3 Men and a Baby",
+   "genre": "drama",
+   "year": 1987,
+   "imdb_rating": 5.9
+ },
+ {
+   "id": 214,
+   "name": "Gone Girl",
+   "genre": "drama",
+   "year": 2014,
+   "imdb_rating": 8.2
+ },
+ {
+   "id": 215,
+   "name": "Kung Fu Panda 2",
+   "genre": "drama",
+   "year": 2011,
+   "imdb_rating": 7.3
+ },
+ {
+   "id": 216,
+   "name": "Hannibal",
+   "genre": "drama",
+   "year": 2001,
+   "imdb_rating": 6.7
+ },
+ {
+   "id": 217,
+   "name": "Catch Me If You Can",
+   "genre": "drama",
+   "year": 2002,
+   "imdb_rating": 8
+ },
+ {
+   "id": 218,
+   "name": "Big Daddy",
+   "genre": "drama",
+   "year": 1999,
+   "imdb_rating": 6.4
+ },
+ {
+   "id": 219,
+   "name": "Se7en",
+   "genre": "drama",
+   "year": 1995,
+   "imdb_rating": 8.6
+ },
+ {
+   "id": 220,
+   "name": "Seven",
+   "genre": "drama",
+   "year": 1979,
+   "imdb_rating": 6.1
+ },
+ {
+   "id": 221,
+   "name": "The Good, the Bad and the Ugly",
+   "genre": "",
+   "year": null,
+   "imdb_rating": null
+ },
+ {
+   "id": 222,
+   "name": "Dawn of the Dead",
+   "genre": "horror",
+   "year": 1978,
+   "imdb_rating": null
+ },
+ {
+   "id": 223,
+   "name": "Shawn of the Dead",
+   "genre": "comedy",
+   "year": 2004,
+   "imdb_rating": null
+ },
+ {
+   "id": 224,
+   "name": "Star Wars: The Force Awakens",
+   "genre": "action",
+   "year": 2015,
+   "imdb_rating": 8.1
+ },
+ {
+   "id": 225,
+   "name": "Star Wars: The Last Jedi",
+   "genre": "action",
+   "year": 2017,
+   "imdb_rating": null
+ },
+ {
+   "id": 226,
+   "name": "The Shining",
+   "genre": "horror",
+   "year": 1985,
+   "imdb_rating": 8.4
+ },
+ {
+   "id": 227,
+   "name": "The Devil and Daniel Johnston",
+   "genre": "",
+   "year": 2005,
+   "imdb_rating": 8
+ },
+ {
+   "id": 228,
+   "name": "Ali Wong: Baby Cobra",
+   "genre": "",
+   "year": 2016,
+   "imdb_rating": null
+ },
+ {
+   "id": 229,
+   "name": "The Big Sick",
+   "genre": "romance",
+   "year": 2017,
+   "imdb_rating": null
+ },
+ {
+   "id": 230,
+   "name": "Deadpool",
+   "genre": "action",
+   "year": 2016,
+   "imdb_rating": null
+ }
+]
