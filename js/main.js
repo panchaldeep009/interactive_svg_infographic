@@ -5,26 +5,29 @@
     let linInfoSVG = document.querySelector("#linerInfographic");
     let svgSize = { "width": 500, "height": 500 };
 
-    let redius = 100;
-    let degree = 360;
+    let redius = 150;
+    let degree = 270;
+    let offDegree = 135;
     let cirX = 250;
-    let cirY = 250
+    let cirY = 250;
+
     cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
-    moviesWithGenres.forEach(function(movie,i,allMovies){
+    
+    moviesWithGenres.slice(0,(moviesWithGenres.length-1)/2).forEach(function(movie,i,allMovies){
         cirInfoSVG.appendChild(
             createSVGElement('circle',{
-                "cx": (Math.cos((degree/allMovies.length)*i * Math.PI / 180.0)*redius)+cirX,
-                "cy": (Math.sin((degree/allMovies.length)*i * Math.PI / 180.0)*redius)+cirY,
+                "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
+                "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
                 "fill":"red",
                 "r": 2
              })
         );
         cirInfoSVG.appendChild(
             createSVGElement('line',{
-                "x1": (Math.cos((degree/allMovies.length)*i * Math.PI / 180.0)*redius)+cirX,
-                "y1": (Math.sin((degree/allMovies.length)*i * Math.PI / 180.0)*redius)+cirY,
-                "x2": (Math.cos((degree/allMovies.length)*i * Math.PI / 180.0)*(redius-10))+cirX,
-                "y2": (Math.sin((degree/allMovies.length)*i * Math.PI / 180.0)*(redius-10))+cirY,
+                "x1": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
+                "y1": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
+                "x2": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirX,
+                "y2": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirY,
                 "stroke":"red",
                 "id":"tLine",
                 "class": "genUnderline",
@@ -35,7 +38,7 @@
                 "x": cirX+redius+5,
                 "y": cirY-0,
                 //"style":`transform: rotate(${((degree/allMovies.length)*i)}deg);`, 
-                "style":`transform: rotate(${((degree/allMovies.length)*i)}deg); transform-origin: ${cirX}px ${cirY}px`,
+                "style":`transform: rotate(${((degree/allMovies.length)*i)+(offDegree)}deg); transform-origin: ${cirX}px ${cirY}px`,
                 "class": "movName"
              },movie.Name)
         );
