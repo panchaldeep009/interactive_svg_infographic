@@ -11,7 +11,7 @@
         "fX":300,"fY":300,"fR":200,
         "fDeg": 360,"fOffDeg": -10,
         "leafs":5,
-        "lR":60,"lDeg":270,
+        "lR":55,"lDeg":270,
         "data":moviesWithGenres.slice(0)
     };
     var splitData = [];
@@ -21,7 +21,7 @@
     splitData.forEach(function(data,i){
 
         // dataToCircle(SVG,data,cirX,cirY,radius,degree,offDegree)
-        dataToCircle(cirInfoSVG,data,
+        dataToCircle(cirInfoSVG,data,Genres,
             (Math.cos((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fX,
             (Math.sin((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fY,
             flowerPer.lR,flowerPer.lDeg,flowerPer.fOffDeg+(flowerPer.lDeg-45)+((flowerPer.fDeg/flowerPer.leafs)*i)+5);
@@ -156,22 +156,50 @@
         return element;
     }
 
-    function dataToCircle(cirInfoSVG,datas,cirX,cirY,redius,degree,offDegree){
+    function dataToCircle(cirInfoSVG,datas,Genres,cirX,cirY,redius,degree,offDegree){
         datas.forEach(function(thisData,i,allMovies){
-            cirInfoSVG.appendChild(
-                createSVGElement('circle',{
-                    "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
-                    "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
-                    "fill":"red",
-                    "r": 2
-                })
-            );
+            // cirInfoSVG.appendChild(
+            //     createSVGElement('circle',{
+            //         "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
+            //         "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
+            //         "fill":"red",
+            //         "r": 2
+            //     })
+            // );
+            thisData.genres.forEach(function(thisGenre,thisI){
+                Genres.forEach(function(genre,genI){
+                   if(genre.Name == thisGenre){
+                    //     linInfoSVG.appendChild(
+                    //         createSVGElement('path',{
+                    //             "d": `M ${(svgSize.width-105)-(thisI*5)},${(8*(i))+7.5} 
+                    //                     C ${(svgSize.width-105)-80},${(8*(i))+7.5},
+                    //                         ${(svgSize.width-105)-80},${(genDistance*(genI))+25},
+                    //                         80,${(genDistance*(genI))+25}`,
+                    //             "stroke":genre.color,
+                    //             "data-genre":genre.Name,
+                    //             "data-movie":movie.Name,
+                    //             "class": "conntLine"
+                    //          })
+                    //     );
+                    cirInfoSVG.appendChild(
+                        createSVGElement('circle',{
+                            "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(5*thisI)))+cirX,
+                            "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(5*thisI)))+cirY,
+                            "fill":genre.color,
+                            // "data-genre":genre.Name,
+                            // "data-movie":movie.Name,
+                            "r": 2
+                         })
+                    );
+                    }
+                });
+            });
             cirInfoSVG.appendChild(
                 createSVGElement('line',{
-                    "x1": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
-                    "y1": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
-                    "x2": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirX,
-                    "y2": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-10))+cirY,
+                    "x1": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius+3))+cirX,
+                    "y1": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius+3))+cirY,
+                    "x2": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius+8))+cirX,
+                    "y2": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius+8))+cirY,
                     "stroke":"red",
                     "id":"tLine",
                     "class": "genUnderline",
@@ -179,8 +207,8 @@
             );
             cirInfoSVG.appendChild(
                 createSVGElement('text',{
-                    "x": cirX+redius+5,
-                    "y": cirY-0,
+                    "x": cirX+redius+8,
+                    "y": cirY+2,
                     "style":`transform: rotate(${((degree/allMovies.length)*i)+(offDegree)}deg); transform-origin: ${cirX}px ${cirY}px`,
                     "class": "movName"
                 }, thisData.Name.length > 18 ? thisData.Name.substr(0,15)+" .." : thisData.Name)
