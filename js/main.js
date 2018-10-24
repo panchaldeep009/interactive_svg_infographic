@@ -7,20 +7,32 @@
     
     outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
     
-    let pices = 50;
+    let pices = 80;
     let redius = 100;
+
     for(var i = 0; i < pices; i++){
         outputSVG.appendChild(
             createSVGElement('circle',{
-                "cx": (Math.cos((360/pices)*i)*redius)+150,
-                "cy": (Math.sin((360/pices)*i)*redius)+150,
+                "cx": (Math.cos((360/pices)*i * Math.PI / 180.0)*redius)+150,
+                "cy": (Math.sin((360/pices)*i * Math.PI / 180.0)*redius)+150,
                 "fill":"red",
                 "r": 2
              })
         );
+        outputSVG.appendChild(
+            createSVGElement('line',{
+                "x1": (Math.cos((360/pices)*i * Math.PI / 180.0)*redius)+150,
+                "y1": (Math.sin((360/pices)*i * Math.PI / 180.0)*redius)+150,
+                "x2": (Math.cos((360/pices)*i * Math.PI / 180.0)*(redius+25))+150,
+                "y2": (Math.sin((360/pices)*i * Math.PI / 180.0)*(redius+25))+150,
+                "stroke":"red",
+                "class": "genUnderline",
+             })
+        );
     }
-    outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
+
 /*
+    outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
     Genres.forEach(function(genre,i){
         outputSVG.appendChild(
             createSVGElement('text',{
