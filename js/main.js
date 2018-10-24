@@ -3,6 +3,7 @@
     
     let outputSVG = document.querySelector("#outSVG");
     let svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
+    let genDistance = svgSize.height/23;
 
     outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
 
@@ -10,7 +11,7 @@
         outputSVG.appendChild(
             createSVGElement('text',{
                 "x": 10,
-                "y": (20*(i))+20,
+                "y": (genDistance*(i))+20,
                 "class": "gen",
                 "data-genre":genre.Name,
                 "data-hover-genre":genre.Name
@@ -19,9 +20,9 @@
         outputSVG.appendChild(
             createSVGElement('line',{
                 "x1": 3,
-                "y1": (20*(i))+25,
+                "y1": (genDistance*(i))+25,
                 "x2": 80,
-                "y2": (20*(i))+25,
+                "y2": (genDistance*(i))+25,
                 "stroke":genre.color,
                 "class": "genUnderline",
                 "data-genre":genre.Name,
@@ -31,7 +32,7 @@
         outputSVG.appendChild(
             createSVGElement('circle',{
                 "cx": 80,
-                "cy": (20*(i))+25,
+                "cy": (genDistance*(i))+25,
                 "fill":genre.color,
                 "r": 3,
                 "data-genre":genre.Name,
@@ -57,8 +58,8 @@
                         createSVGElement('path',{
                             "d": `M ${(svgSize.width-105)-(thisI*5)},${(8*(i))+7.5} 
                                     C ${(svgSize.width-105)-80},${(8*(i))+7.5},
-                                        ${(svgSize.width-105)-80},${(20*(genI))+25},
-                                        80,${(20*(genI))+25}`,
+                                        ${(svgSize.width-105)-80},${(genDistance*(genI))+25},
+                                        80,${(genDistance*(genI))+25}`,
                             "stroke":genre.color,
                             "data-genre":genre.Name,
                             "data-movie":movie.Name,
