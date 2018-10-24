@@ -24,7 +24,8 @@
         dataToCircle(cirInfoSVG,data,Genres,
             (Math.cos((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fX,
             (Math.sin((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fY,
-            flowerPer.lR,flowerPer.lDeg,flowerPer.fOffDeg+(flowerPer.lDeg-45)+((flowerPer.fDeg/flowerPer.leafs)*i)+5);
+            flowerPer.lR,flowerPer.lDeg,flowerPer.fOffDeg+(flowerPer.lDeg-45)+((flowerPer.fDeg/flowerPer.leafs)*i)+5,
+            flowerPer.fX,flowerPer.fY);
     });
 
     svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
@@ -156,31 +157,24 @@
         return element;
     }
 
-    function dataToCircle(cirInfoSVG,datas,Genres,cirX,cirY,redius,degree,offDegree){
+    function dataToCircle(cirInfoSVG,datas,Genres,cirX,cirY,redius,degree,offDegree,pX,pY){
         datas.forEach(function(thisData,i,allMovies){
-            // cirInfoSVG.appendChild(
-            //     createSVGElement('circle',{
-            //         "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirX,
-            //         "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*redius)+cirY,
-            //         "fill":"red",
-            //         "r": 2
-            //     })
-            // );
             thisData.genres.forEach(function(thisGenre,thisI){
                 Genres.forEach(function(genre,genI){
                    if(genre.Name == thisGenre){
-                    //     linInfoSVG.appendChild(
-                    //         createSVGElement('path',{
-                    //             "d": `M ${(svgSize.width-105)-(thisI*5)},${(8*(i))+7.5} 
-                    //                     C ${(svgSize.width-105)-80},${(8*(i))+7.5},
-                    //                         ${(svgSize.width-105)-80},${(genDistance*(genI))+25},
-                    //                         80,${(genDistance*(genI))+25}`,
-                    //             "stroke":genre.color,
-                    //             "data-genre":genre.Name,
-                    //             "data-movie":movie.Name,
-                    //             "class": "conntLine"
-                    //          })
-                    //     );
+                    cirInfoSVG.appendChild(
+                        createSVGElement('path',{
+                            "d": `M ${pX},${pY}
+                                    C ${cirX},${cirY},
+                                        ${cirX},${cirY},
+                                        ${(Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(5*thisI)))+cirX},
+                                        ${(Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(5*thisI)))+cirY},`,
+                            "stroke":genre.color,
+                            // "data-genre":genre.Name,
+                            // "data-movie":movie.Name,
+                            "class": "conntLine"
+                         })
+                    );
                     cirInfoSVG.appendChild(
                         createSVGElement('circle',{
                             "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(5*thisI)))+cirX,
