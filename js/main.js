@@ -5,75 +5,73 @@
     let cirInfoSVG = document.querySelector("#circularInfographic");
     
     let svgSize = { "width": 600, "height": 700 };
+    
+    drawCirInfoGData(cirInfoSVG,300,385,195,360,45,5,55,270,moviesWithGenres.slice(0));
 
-    cirInfoSVG.innerHTML = "";
-    cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
-    let flowerPer = { 
-        "fX":300,"fY":385,"fR":195,
-        "fDeg": 360,"fOffDeg": 45,
-        "leafs":5,
-        "lR":55,"lDeg":270,
-        "data":moviesWithGenres.slice(0)
-    };
-    var splitData = [];
-    for (let i = flowerPer.leafs; i > 0; i--) {
-        splitData.push(flowerPer.data.splice(0, Math.ceil(flowerPer.data.length / i)));
+    // drawCirInfoGData ( SVG Container, Flower X, Y, Radius, Deg, offDeg, leafs, leaf Radius, leaf Deg, Data)
+    function drawCirInfoGData(cirInfoSVG,fX,fY,fR,fDeg,fOffDeg,leafs,lR,lDeg,data){
+        cirInfoSVG.innerHTML = "";
+        cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
+        var splitData = [];
+        for (let i = leafs; i > 0; i--) {
+            splitData.push(data.splice(0, Math.ceil(data.length / i)));
+        }
+        splitData.forEach(function(data,i){
+
+            // dataToCircle(SVG,data,cirX,cirY,radius,degree,offDegree)
+            dataToCircle(cirInfoSVG,data,Genres,
+                (Math.cos((((fDeg/leafs)*i)+(fOffDeg)) * Math.PI / 180.0)*fR)+fX,
+                (Math.sin((((fDeg/leafs)*i)+(fOffDeg)) * Math.PI / 180.0)*fR)+fY,
+                lR,lDeg,fOffDeg+(lDeg-45)+((fDeg/leafs)*i)+5,
+                fX,fY);
+        });
+        
+        let maxGenCount = Math.max(...Genres.map(g => g.count));
+        let allSum = 0;
+        Genres.map(g => g.count).forEach(c => { allSum += Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount)); });
+        
+        Genres.forEach(function(genre,genI,allGen){
+            
+            cirInfoSVG.appendChild(
+                createSVGElement('text',{
+                    "x": 15+(15*genI),
+                    "y": 75,
+                    "style":`transform: rotate(-60deg); transform-origin: ${15+(15*genI)}px ${75}px`,
+                    "class": "genName",
+                    "data-genre":genre.Name,
+                    "data-hover-genre":genre.Name,
+                }, ('0'+genre.count).slice(-2)+"&emsp;&emsp;&emsp;"+genre.Name)
+            );
+
+            cirInfoSVG.appendChild(
+                createSVGElement('circle',{
+                    "cx": 20+(15*genI),
+                    "cy": 55,
+                    "fill":genre.color,
+                    "data-genre":genre.Name,
+                    "data-hover-genre":genre.Name,
+                    "r": 5
+                })
+            );
+            
+            let sumOfLast = 0;
+            let lastGenres = allGen.slice(0);
+            lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => { sumOfLast += averageRadius(c,maxGenCount,20); });
+
+            cirInfoSVG.appendChild(
+                createSVGElement('circle',{
+                    "cx": (fX-(allSum))+(sumOfLast*1.8),
+                    "cy": fY,
+                    "fill":genre.color,
+                    "data-genre":genre.Name,
+                    "data-hover-genre":genre.Name,
+                    "r": (20*genre.count/maxGenCount) < 2 ? 2 : (20*genre.count/maxGenCount)
+                })
+            );       
+        });
     }
-    splitData.forEach(function(data,i){
-
-        // dataToCircle(SVG,data,cirX,cirY,radius,degree,offDegree)
-        dataToCircle(cirInfoSVG,data,Genres,
-            (Math.cos((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fX,
-            (Math.sin((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fY,
-            flowerPer.lR,flowerPer.lDeg,flowerPer.fOffDeg+(flowerPer.lDeg-45)+((flowerPer.fDeg/flowerPer.leafs)*i)+5,
-            flowerPer.fX,flowerPer.fY);
-    });
-    
-    let maxGenCount = Math.max(...Genres.map(g => g.count));
-    let allSum = 0;
-    Genres.map(g => g.count).forEach(c => { allSum += Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount)); });
-    
-    Genres.forEach(function(genre,genI,allGen){
-        
-        cirInfoSVG.appendChild(
-            createSVGElement('text',{
-                "x": 15+(15*genI),
-                "y": 75,
-                "style":`transform: rotate(-60deg); transform-origin: ${15+(15*genI)}px ${75}px`,
-                "class": "genName",
-                "data-genre":genre.Name,
-                "data-hover-genre":genre.Name,
-            }, ('0'+genre.count).slice(-2)+"&emsp;&emsp;&emsp;"+genre.Name)
-        );
-
-        cirInfoSVG.appendChild(
-            createSVGElement('circle',{
-                "cx": 20+(15*genI),
-                "cy": 55,
-                "fill":genre.color,
-                "data-genre":genre.Name,
-                "data-hover-genre":genre.Name,
-                "r": 5
-            })
-        );
-        
-        let sumOfLast = 0;
-        let lastGenres = allGen.slice(0);
-        lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => { sumOfLast += averageRadius(c,maxGenCount,20); });
-
-        cirInfoSVG.appendChild(
-            createSVGElement('circle',{
-                "cx": (flowerPer.fX-(allSum))+(sumOfLast*1.8),
-                "cy": flowerPer.fY,
-                "fill":genre.color,
-                "data-genre":genre.Name,
-                "data-hover-genre":genre.Name,
-                "r": (20*genre.count/maxGenCount) < 2 ? 2 : (20*genre.count/maxGenCount)
-             })
-        );       
-    });
-
     function averageRadius(c,max,p){ return (Math.round((p*c/max) < 2 ? 2 : (p*c/max)))}
+
     function dataToCircle(cirInfoSVG,datas,Genres,cirX,cirY,redius,degree,offDegree,pX,pY){
         datas.forEach(function(thisData,i,allMovies){
             thisData.genres.forEach(function(thisGenre,thisI){
