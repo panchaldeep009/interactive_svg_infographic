@@ -12,6 +12,9 @@
     @include transform(
         translateX(-50%)
     );
+    path, circle, text {
+        @include transition( opacity .25s );
+    }
 }
 body{
     background-color: #555;
