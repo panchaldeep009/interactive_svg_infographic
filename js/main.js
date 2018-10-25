@@ -7,7 +7,16 @@
     let svgSize = { "width": 600, "height": 700 };
     
     drawCirInfoGData(cirInfoSVG,300,385,195,360,45,5,55,270,moviesWithGenres.slice(0));
-
+    // document.querySelector("#adjustInfoGraphic").addEventListener('change', function(){
+    //     let fR,fDeg,fOffDeg,leafs,lR,lDeg;
+    //     this.querySelector("#fRadius_v").innerHTML = fR = this.querySelector("#fRadius_s").value;
+    //     this.querySelector("#fDeg_v").innerHTML = fDeg = parseInt(this.querySelector("#fDeg_s").value);
+    //     this.querySelector("#fOffDeg_v").innerHTML = fOffDeg = parseInt(this.querySelector("#fOffDeg_s").value);
+    //     this.querySelector("#leafs_v").innerHTML = leafs = parseInt(this.querySelector("#leafs_s").value);
+    //     this.querySelector("#lR_v").innerHTML = lR = parseInt(this.querySelector("#lR_s").value);
+    //     this.querySelector("#lDeg_v").innerHTML = lDeg = parseInt(this.querySelector("#lDeg_s").value);
+    //     drawCirInfoGData(cirInfoSVG,300,385,fR,fDeg,fOffDeg,leafs,lR,lDeg,moviesWithGenres.slice(0))
+    // });
     // drawCirInfoGData ( SVG Container, Flower X, Y, Radius, Deg, offDeg, leafs, leaf Radius, leaf Deg, Data)
     function drawCirInfoGData(cirInfoSVG,fX,fY,fR,fDeg,fOffDeg,leafs,lR,lDeg,data){
         cirInfoSVG.innerHTML = "";
