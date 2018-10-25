@@ -59,7 +59,7 @@
         
         let sumOfLast = 0;
         let lastGenres = allGen.slice(0);
-        lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => { sumOfLast += (Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount))); });
+        lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => { sumOfLast += averageRadius(c,maxGenCount,20); });
 
         cirInfoSVG.appendChild(
             createSVGElement('circle',{
@@ -73,25 +73,29 @@
         );       
     });
 
-
+    function averageRadius(c,max,p){ return (Math.round((p*c/max) < 2 ? 2 : (p*c/max)))}
     function dataToCircle(cirInfoSVG,datas,Genres,cirX,cirY,redius,degree,offDegree,pX,pY){
         datas.forEach(function(thisData,i,allMovies){
             thisData.genres.forEach(function(thisGenre,thisI){
                 
                 let maxGenCount = Math.max(...Genres.map(g => g.count));
                 let allSum = 0;
-                Genres.map(g => g.count).forEach(c => { allSum += Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount)); });
+                Genres.map(g => g.count).forEach(c => { allSum += averageRadius(c,maxGenCount,20); });
                 
                 Genres.forEach(function(genre,genI,allGen){
                    if(genre.Name == thisGenre){
 
                     let sumOfLast = 0;
                     let lastGenres = allGen.slice(0);
-                    lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => { sumOfLast += (Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount))); });
+                    lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => { sumOfLast += averageRadius(c,maxGenCount,20); });
+
+                    let genRadius = averageRadius(genre.count,maxGenCount,20);
+                    let randomToleranceX = (Math.floor(Math.random() * genRadius) -(genRadius/2) );
+                    let randomToleranceY = (Math.floor(Math.random() * genRadius) -(genRadius/2) );
 
                     cirInfoSVG.appendChild(
                         createSVGElement('path',{
-                            "d": `M ${(pX-(allSum))+(sumOfLast*1.8)},${pY}
+                            "d": `M ${(pX-(allSum)+randomToleranceX)+(sumOfLast*1.8)},${pY+randomToleranceY}
                                     C ${cirX},${cirY},
                                         ${(Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(20)))+cirX},
                                         ${(Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(20)))+cirY},
