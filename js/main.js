@@ -9,7 +9,7 @@
     cirInfoSVG.innerHTML = "";
     cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
     let flowerPer = { 
-        "fX":300,"fY":380,"fR":195,
+        "fX":300,"fY":385,"fR":195,
         "fDeg": 360,"fOffDeg": 45,
         "leafs":5,
         "lR":55,"lDeg":270,
@@ -37,13 +37,13 @@
         
         cirInfoSVG.appendChild(
             createSVGElement('text',{
-                "x": 25+(15*genI),
-                "y": 45,
-                "style":`transform: rotate(-60deg); transform-origin: ${25+(15*genI)}px ${45}px`,
+                "x": 15+(15*genI),
+                "y": 75,
+                "style":`transform: rotate(-60deg); transform-origin: ${15+(15*genI)}px ${75}px`,
                 "class": "genName",
                 "data-genre":genre.Name,
                 "data-hover-genre":genre.Name,
-            }, genre.Name)
+            }, ('0'+genre.count).slice(-2)+"&emsp;&emsp;&emsp;"+genre.Name)
         );
 
         cirInfoSVG.appendChild(
