@@ -4,12 +4,12 @@
     
     let cirInfoSVG = document.querySelector("#circularInfographic");
     
-    let svgSize = { "width": 600, "height": 600 };
+    let svgSize = { "width": 600, "height": 700 };
 
     cirInfoSVG.innerHTML = "";
     cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
     let flowerPer = { 
-        "fX":300,"fY":300,"fR":195,
+        "fX":300,"fY":380,"fR":195,
         "fDeg": 360,"fOffDeg": 45,
         "leafs":5,
         "lR":55,"lDeg":270,
@@ -34,6 +34,16 @@
     Genres.map(g => g.count).forEach(c => { allSum += Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount)); });
     
     Genres.forEach(function(genre,genI,allGen){
+        cirInfoSVG.appendChild(
+            createSVGElement('circle',{
+                "cx": 20+(15*genI),
+                "cy": 55,
+                "fill":genre.color,
+                "data-genre":genre.Name,
+                "data-hover-genre":genre.Name,
+                "r": 5
+            })
+        );
         
         let sumOfLast = 0;
         let lastGenres = allGen.slice(0);
