@@ -8,8 +8,8 @@
     cirInfoSVG.innerHTML = "";
     cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
     let flowerPer = { 
-        "fX":300,"fY":300,"fR":200,
-        "fDeg": 360,"fOffDeg": -10,
+        "fX":300,"fY":300,"fR":195,
+        "fDeg": 360,"fOffDeg": 45,
         "leafs":5,
         "lR":55,"lDeg":270,
         "data":moviesWithGenres.slice(0)
@@ -26,6 +26,28 @@
             (Math.sin((((flowerPer.fDeg/flowerPer.leafs)*i)+(flowerPer.fOffDeg)) * Math.PI / 180.0)*flowerPer.fR)+flowerPer.fY,
             flowerPer.lR,flowerPer.lDeg,flowerPer.fOffDeg+(flowerPer.lDeg-45)+((flowerPer.fDeg/flowerPer.leafs)*i)+5,
             flowerPer.fX,flowerPer.fY);
+    });
+    
+    let maxGenCount = Math.max(...Genres.map(g => g.count));
+    let allSum = 0;
+    Genres.map(g => g.count).forEach(c => { allSum += Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount)); });
+    
+    Genres.forEach(function(genre,genI,allGen){
+        
+        let sumOfLast = 0;
+        let lastGenres = allGen.slice(0);
+        lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => { sumOfLast += (Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount))); });
+
+        cirInfoSVG.appendChild(
+            createSVGElement('circle',{
+                "cx": (flowerPer.fX-(allSum))+(sumOfLast*1.8),
+                "cy": flowerPer.fY,
+                "fill":genre.color,
+                // "data-genre":genre.Name,
+                // "data-movie":movie.Name,
+                "r": (20*genre.count/maxGenCount) < 2 ? 2 : (20*genre.count/maxGenCount)
+             })
+        );       
     });
 
     svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
@@ -160,13 +182,24 @@
     function dataToCircle(cirInfoSVG,datas,Genres,cirX,cirY,redius,degree,offDegree,pX,pY){
         datas.forEach(function(thisData,i,allMovies){
             thisData.genres.forEach(function(thisGenre,thisI){
-                Genres.forEach(function(genre,genI){
+                
+                let maxGenCount = Math.max(...Genres.map(g => g.count));
+                let allSum = 0;
+                Genres.map(g => g.count).forEach(c => { allSum += Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount)); });
+                
+                Genres.forEach(function(genre,genI,allGen){
                    if(genre.Name == thisGenre){
+
+                    let sumOfLast = 0;
+                    let lastGenres = allGen.slice(0);
+                    lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => { sumOfLast += (Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount))); });
+
                     cirInfoSVG.appendChild(
                         createSVGElement('path',{
-                            "d": `M ${pX},${pY}
+                            "d": `M ${(pX-(allSum))+(sumOfLast*1.8)},${pY}
                                     C ${cirX},${cirY},
-                                        ${cirX},${cirY},
+                                        ${(Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(20)))+cirX},
+                                        ${(Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(20)))+cirY},
                                         ${(Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(5*thisI)))+cirX},
                                         ${(Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(redius-(5*thisI)))+cirY},`,
                             "stroke":genre.color,
