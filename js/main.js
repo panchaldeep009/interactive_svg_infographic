@@ -34,6 +34,18 @@
     Genres.map(g => g.count).forEach(c => { allSum += Math.round((20*c/maxGenCount) < 2 ? 2 : (20*c/maxGenCount)); });
     
     Genres.forEach(function(genre,genI,allGen){
+        
+        cirInfoSVG.appendChild(
+            createSVGElement('text',{
+                "x": 25+(15*genI),
+                "y": 45,
+                "style":`transform: rotate(-60deg); transform-origin: ${25+(15*genI)}px ${45}px`,
+                "class": "genName",
+                "data-genre":genre.Name,
+                "data-hover-genre":genre.Name,
+            }, genre.Name)
+        );
+
         cirInfoSVG.appendChild(
             createSVGElement('circle',{
                 "cx": 20+(15*genI),
