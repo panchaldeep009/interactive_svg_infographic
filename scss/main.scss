@@ -3,32 +3,74 @@
 @import '_mixins';
 
 @import '_variables';
-
-#outSVG{
-    max-width:1000px;
-    width: 100%;
-    margin-top: 50px;
-    margin-left: 50%;
-    @include transform(
-        translateX(-50%)
-    );
-}
 body{
     background-color: #555;
     overflow-x: hidden;
+    font-family: sans-serif;
 }
-.gen { 
-    font: normal 10px sans-serif;
-    fill: #FFF;
-}
-.genUnderline, .conntLine{ 
-    stroke-width:.5;
-    fill: transparent;
-}
-.movName{
-    font: normal 6.5px sans-serif;
-    fill: #FFF;
-}
-[data-hover-movie],[data-hover-genre]{
-    cursor: pointer;
+#infoGraphics{
+    position: relative;
+    max-width:1000px;
+    width: 100%;
+    margin-left: 50%;
+    padding-top: 30px;
+    @include transform(
+        translateX(-50%)
+    );
+    h2{
+        text-align: center;
+        font-size: 35px;
+        color: white;
+        border-bottom: 1px solid #FFF;
+        padding: 25px;
+    }
+    #circularInfographic, #linerInfographic{
+        width: 100%;
+        margin-top: 50px;
+        path, circle, text {
+            @include transition( opacity .25s );
+        }
+        .gen { 
+            font: normal 10px sans-serif;
+            fill: #FFF;
+        }
+        .genUnderline, .conntLine{ 
+            stroke-width:.5;
+            fill: transparent;
+        }
+        .movName{
+            font: normal 6.5px sans-serif;
+            fill: #FFF;
+        }
+        .genName{
+            font: normal 8px sans-serif;
+            fill: #FFF;
+        }
+        [data-hover-movie],[data-hover-genre]{
+            cursor: pointer;
+        }
+    }
+    #adjustInfoGraphic{
+        border: 2px solid #FFF;
+        padding: 2em;
+        width: max-content;
+        [type="range"]{
+            width: 100%;
+        }
+        legend {
+            background-color: #eee;
+            color: #333;
+            padding: 8px 24px;
+        }
+        label {
+            margin-top: 1rem;
+            display: block;
+            font-size: .8rem;
+            color: #FFF;
+        }
+        p{
+            text-align: right;
+            color: #FFF;
+        }
+    }
 }

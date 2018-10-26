@@ -1,14 +1,259 @@
 "use strict";
 (() => {
-    
-    let outputSVG = document.querySelector("#outSVG");
-    let svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
-    let genDistance = svgSize.height/23;
+    //// Circular Connecting InfoGraphic SVG
+    // SVG container
+    let cirInfoSVG = document.querySelector("#circularInfographic");
+    // Size of container
+    let svgSize = { "width": 600, "height": 700 };
 
-    outputSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
+    // Function to draw Flower type infoGraphic
+    drawCirInfoGData(cirInfoSVG,svgSize,300,400,195,360,50,5,55,270,moviesWithGenres.slice(0));
+    // drawCirInfoGData ( SVG Container, Flower X, Y, Radius, Deg, offDeg, total leafs, leaf Radius, leaf Deg, Data) (fun on line : 98)
+    function drawCirInfoGData(cirInfoSVG,svgSize,fX,fY,fR,fDeg,fOffDeg,leafs,lR,lDeg,data){
+        //Emptying SVG container
+        cirInfoSVG.innerHTML = "";
+        // Setting Size
+        cirInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
+        // split data based on number of leafs 
+        var splitData = [];
+        for (let i = leafs; i > 0; i--) {
+            splitData.push(data.splice(0, Math.ceil(data.length / i)));
+        }
+
+        // draw circle for each leaf based on split data 
+        splitData.forEach(function(data,i){
+            // finding position of a leaf circle based radius of flower and total number of leafs
+            let cirX = (Math.cos((((fDeg/leafs)*i)+(fOffDeg)) * Math.PI / 180.0)*fR)+fX;
+            let cirY = (Math.sin((((fDeg/leafs)*i)+(fOffDeg)) * Math.PI / 180.0)*fR)+fY;
+
+            // dataToCircle(SVG,data,subData,cirX,cirY,radius,degree,offDegree,flowerX,flowerY)
+            dataToCircle(cirInfoSVG,data,Genres,
+                cirX,cirY,lR,lDeg,fOffDeg+(lDeg-45)+((fDeg/leafs)*i)+5,
+                fX,fY);
+        });
+
+        // to find maximum number of most use genre in all movies
+        let maxGenCount = Math.max(...Genres.map(g => g.count));
+        
+        // Count all genres
+        let allSum = 0;
+        Genres.map(g => g.count).forEach(c => {
+            // averageRadius : to find radius of genre circle from it's count (fun on line : 95)
+            allSum += averageRadius(c,maxGenCount,20); 
+        });
+
+        // throw each Genres of all movies
+        Genres.forEach(function(genre,genI,allGen){
+
+            // List Genres on top
+            cirInfoSVG.appendChild(
+                createSVGElement('text',{
+                    "x": 15+(15*genI),
+                    "y": 75,
+                    "style":`transform: rotate(-60deg); transform-origin: ${15+(15*genI)}px ${75}px`,
+                    "class": "genName",
+                    "data-genre":genre.Name,
+                    "data-hover-genre":genre.Name,
+                }, ('0'+genre.count).slice(-2)+"&emsp;&emsp;&emsp;"+genre.Name)
+            );
+
+            // List circles and colors of Genres on top
+            cirInfoSVG.appendChild(
+                createSVGElement('circle',{
+                    "cx": 20+(15*genI),
+                    "cy": 55,
+                    "fill":genre.color,
+                    "data-genre":genre.Name,
+                    "data-hover-genre":genre.Name,
+                    "r": 5
+                })
+            );
+            
+            //count previous genres radius to left space on left
+            let sumOfLast = 0;
+            let lastGenres = allGen.slice(0);
+            lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => {
+                // averageRadius : to find radius of genre circle from it's count (fun on line : 95)
+                sumOfLast += averageRadius(c,maxGenCount,20); 
+            });
+
+            // Draw circle of genre based on it's count
+            cirInfoSVG.appendChild(
+                createSVGElement('circle',{
+                    "cx": (fX-(allSum))+(sumOfLast*1.8),
+                    "cy": fY,
+                    "fill":genre.color,
+                    "data-genre":genre.Name,
+                    "data-hover-genre":genre.Name,
+                    "r": averageRadius(genre.count,maxGenCount,20)
+                })
+            );       
+        });
+    }
+
+    // averageRadius : to find radius of genre circle from it's count
+    function averageRadius(c,max,p){ return (Math.round((p*c/max) < 2 ? 2 : (p*c/max)))}
+    
+    // function to draw leaf circle
+    function dataToCircle(cirInfoSVG,movieData,Genres,cirX,cirY,radius,degree,offDegree,pX,pY){
+        // Get throw Each movie
+        movieData.forEach(function(thisData,i,allMovies){
+            // Get throw all genres of this movie
+            thisData.genres.forEach(function(thisGenre,thisI){
+
+                // Get maximum number of most use genre in all movies
+                let maxGenCount = Math.max(...Genres.map(g => g.count));
+                
+                // Count all genres
+                let allSum = 0;
+                Genres.map(g => g.count).forEach(c => { 
+                    // averageRadius : to find radius of genre circle from it's count (fun on line : 95)
+                    allSum += averageRadius(c,maxGenCount,20); 
+                });
+                
+                // throw all genres of all movie
+                Genres.forEach(function(genre,genI,allGen){
+                    // find this movie genre match with genres list
+                    if(genre.Name == thisGenre){
+                        //count previous genres radius to left space on left
+                        let sumOfLast = 0;
+                        let lastGenres = allGen.slice(0);
+                        lastGenres.splice(0,genI+1).map(g => g.count).forEach(c => { sumOfLast += averageRadius(c,maxGenCount,20); });
+
+                        // find this genres circle radius 
+                        let genRadius = averageRadius(genre.count,maxGenCount,20);
+
+                        // find random position for connecting line within this genres radius
+                        let randomToleranceX = (Math.floor(Math.random() * genRadius) -(genRadius/2) );
+                        let randomToleranceY = (Math.floor(Math.random() * genRadius) -(genRadius/2) );
+
+                        // drawing connecting line from this movie genres to main Genres
+                        cirInfoSVG.appendChild(
+                            createSVGElement('path',{
+                                "d": `M ${(pX-(allSum)+randomToleranceX)+(sumOfLast*1.8)},${pY+randomToleranceY}
+                                        C ${cirX},${cirY},
+                                            ${(Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius-(20)))+cirX},
+                                            ${(Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius-(20)))+cirY},
+                                            ${(Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius-(5*thisI)))+cirX},
+                                            ${(Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius-(5*thisI)))+cirY},`,
+                                "stroke":genre.color,
+                                "data-genre":genre.Name,
+                                "data-movie":thisData.Name,
+                                "class": "conntLine"
+                            })
+                        );
+
+                        // drawing this movie genre circle
+                        cirInfoSVG.appendChild(
+                            createSVGElement('circle',{
+                                "cx": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius-(5*thisI)))+cirX,
+                                "cy": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius-(5*thisI)))+cirY,
+                                "fill":genre.color,
+                                "data-genre":genre.Name,
+                                "data-movie":thisData.Name,
+                                "r": 2
+                            })
+                        );
+                    }
+                });
+            });
+
+            // drawing pointing line from genres circle to movie name
+            cirInfoSVG.appendChild(
+                createSVGElement('line',{
+                    "x1": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius+3))+cirX,
+                    "y1": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius+3))+cirY,
+                    "x2": (Math.cos((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius+8))+cirX,
+                    "y2": (Math.sin((((degree/allMovies.length)*i)+(offDegree)) * Math.PI / 180.0)*(radius+8))+cirY,
+                    "stroke":"red",
+                    "id":"tLine",
+                    "class": "genUnderline",
+                })
+            );
+
+            // movie name 
+            cirInfoSVG.appendChild(
+                createSVGElement('text',{
+                    "x": cirX+radius+8,
+                    "y": cirY+2,
+                    "style":`transform: rotate(${((degree/allMovies.length)*i)+(offDegree)}deg); transform-origin: ${cirX}px ${cirY}px`,
+                    "class": "movName",
+                    "data-genre":thisData.genres.toString(),
+                    "data-hover-movie":thisData.Name,
+                    "data-movie":thisData.Name
+                }, thisData.Name.length > 18 ? thisData.Name.substr(0,15)+" .." : thisData.Name)
+            );
+        });
+    }
+    //end of Function : dataToCircle
+
+    /// Mouse Events
+
+    // On hover genre element 
+    cirInfoSVG.querySelectorAll('[data-hover-genre]').forEach(thisElement => {
+        thisElement.addEventListener('mouseover', function(){
+            cirInfoSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
+                if(onOfElement.dataset.genre.includes(thisElement.dataset.hoverGenre)){
+                    onOfElement.style.opacity = 1;
+                } else {
+                    onOfElement.style.opacity = 0.025;
+                }
+            })
+        });
+
+        thisElement.addEventListener('mouseout', function(){
+            cirInfoSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
+                onOfElement.style.opacity = 1;
+            })
+        });
+    });
+
+    // On hover movie names
+    cirInfoSVG.querySelectorAll('[data-hover-movie]').forEach(thisElement => {
+        thisElement.addEventListener('mouseover', function(){
+            cirInfoSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
+                if(thisElement.dataset.hoverMovie == oneOfElement.dataset.movie){
+                    oneOfElement.style.opacity = 1;
+                } else {
+                    oneOfElement.style.opacity = 0.025;
+                }
+            });
+            cirInfoSVG.querySelectorAll('[data-hover-genre]').forEach(oneOfElement => {
+                if(thisElement.dataset.genre.includes(oneOfElement.dataset.hoverGenre)){
+                    oneOfElement.style.opacity = 1;
+                } else {
+                    oneOfElement.style.opacity = 0.025;
+                }
+            })
+        });
+
+        thisElement.addEventListener('mouseout', function(){
+            cirInfoSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
+                oneOfElement.style.opacity = 1;
+            });
+            cirInfoSVG.querySelectorAll('[data-hover-genre]').forEach(oneOfElement => {
+                oneOfElement.style.opacity = 1;
+            });
+        });
+    });
+
+
+
+
+
+    
+    //// Liner Connecting SVG
+
+    let linInfoSVG = document.querySelector("#linerInfographic");
+
+    svgSize = { "width": 400, "height": (moviesWithGenres.length*8)+10 };
+
+    let genDistance = svgSize.height/23;
+    
+    linInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
 
     Genres.forEach(function(genre,i){
-        outputSVG.appendChild(
+        linInfoSVG.appendChild(
             createSVGElement('text',{
                 "x": 10,
                 "y": (genDistance*(i))+20,
@@ -17,7 +262,7 @@
                 "data-hover-genre":genre.Name
              },genre.Name)
         );
-        outputSVG.appendChild(
+        linInfoSVG.appendChild(
             createSVGElement('line',{
                 "x1": 3,
                 "y1": (genDistance*(i))+25,
@@ -29,7 +274,7 @@
                 "data-hover-genre":genre.Name
              })
         );
-        outputSVG.appendChild(
+        linInfoSVG.appendChild(
             createSVGElement('circle',{
                 "cx": 80,
                 "cy": (genDistance*(i))+25,
@@ -41,7 +286,7 @@
         );
     });
     moviesWithGenres.forEach(function(movie,i){
-        outputSVG.appendChild(
+        linInfoSVG.appendChild(
             createSVGElement('text',{
                 "x": svgSize.width-100,
                 "y": (8*(i))+10,
@@ -54,7 +299,7 @@
         movie.genres.forEach(function(thisGenre,thisI){
             Genres.forEach(function(genre,genI){
                 if(genre.Name == thisGenre){
-                    outputSVG.appendChild(
+                    linInfoSVG.appendChild(
                         createSVGElement('path',{
                             "d": `M ${(svgSize.width-105)-(thisI*5)},${(8*(i))+7.5} 
                                     C ${(svgSize.width-105)-80},${(8*(i))+7.5},
@@ -66,7 +311,7 @@
                             "class": "conntLine"
                          })
                     );
-                    outputSVG.appendChild(
+                    linInfoSVG.appendChild(
                         createSVGElement('circle',{
                             "cx": (svgSize.width-105)-(thisI*5),
                             "cy": (8*(i))+7.5,
@@ -81,9 +326,9 @@
         });
     });
 
-    outputSVG.querySelectorAll('[data-hover-genre]').forEach(thisElement => {
+    linInfoSVG.querySelectorAll('[data-hover-genre]').forEach(thisElement => {
         thisElement.addEventListener('mouseover', function(){
-            outputSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
+            linInfoSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
                 if(onOfElement.dataset.genre.includes(thisElement.dataset.hoverGenre)){
                     onOfElement.style.opacity = 1;
                 } else {
@@ -93,15 +338,15 @@
         });
 
         thisElement.addEventListener('mouseout', function(){
-            outputSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
+            linInfoSVG.querySelectorAll('[data-genre]').forEach(onOfElement => {
                 onOfElement.style.opacity = 1;
             })
         });
     });
 
-    outputSVG.querySelectorAll('[data-hover-movie]').forEach(function(thisElement,i,allElements){
+    linInfoSVG.querySelectorAll('[data-hover-movie]').forEach(function(thisElement,i,allElements){
         thisElement.addEventListener('mouseover', function(){
-            outputSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
+            linInfoSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
                 if(thisElement.dataset.hoverMovie == oneOfElement.dataset.movie){
                     oneOfElement.style.opacity = 1;
                 } else {
@@ -111,7 +356,7 @@
         });
 
         thisElement.addEventListener('mouseout', function(){
-            outputSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
+            linInfoSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
                 oneOfElement.style.opacity = 1;
             })
         });
@@ -129,78 +374,5 @@
         }
         return element;
     }
-
-    // blueBalls.addEventListener("change", function(){
-
-    //     outputSVG.innerHTML = "";
-
-    //     let xRange = 200;
-    //     let yRange = 200;
-
-    //     let targetCircle = document.createElementNS(svgNS, 'circle');
-    //     Object.entries({
-    //         "cx":20,
-    //         "cy":(yRange/2),
-    //         "r":10,
-    //         "fill":"red"
-    //     }).forEach(([attrName, attrValue]) => {
-    //         targetCircle.setAttribute(attrName,attrValue);
-    //     });
-
-    //     let outCircles = [];
-    //     let outPaths = [];
-
-    //     for (let i = 0; i < this.value; i++) {
-
-    //         outCircles[i] = document.createElementNS(svgNS, 'circle');
-    //         Object.entries({
-    //             "cx":180,
-    //             "cy":(yRange/(parseInt(this.value)+1))*(i+1),
-    //             "r":10,
-    //             "fill":"blue"
-    //         }).forEach(([attrName, attrValue]) => {
-    //             outCircles[i].setAttribute(attrName,attrValue);
-    //         });
-
-    //         outPaths[i] = document.createElementNS(svgNS, 'path');
-    //         Object.entries({
-    //             "d":`M24 100 C 20 100, ${xRange/1.5} ${yRange/2}, 180 ${(yRange/(parseInt(this.value)+1))*(i+1)}`,
-    //             "fill":"transparent",
-    //             "stroke":"blue"
-    //         }).forEach(([attrName, attrValue]) => {
-    //             outPaths[i].setAttribute(attrName,attrValue);
-    //         });
-
-    //     }
-
-    //     outPaths.forEach(function(thisPath,index,allPaths){ 
-    //         thisPath.addEventListener('mouseover', function(){
-    //             allPaths.map(thisPath => thisPath.style.opacity = 0.2);
-    //             outCircles.map(thisCircle => thisCircle.style.opacity = 0.2);
-    //             thisPath.style.opacity = 1;
-    //             outCircles[index].style.opacity = 1;
-    //         });
-    //         thisPath.addEventListener('mouseout', function(){
-    //             allPaths.map(otherPaths => otherPaths.style.opacity = 1);
-    //             outCircles.map(thisCircle => thisCircle.style.opacity = 1);
-    //         });
-    //     });
-
-    //     outCircles.forEach(function(thisCircle,index,allCircles){ 
-    //         thisCircle.addEventListener('mouseover', function(){
-    //             allCircles.map(thisCircle => thisCircle.style.opacity = 0.2);
-    //             outPaths.map(thisPath => thisPath.style.opacity = 0.2);
-    //             thisCircle.style.opacity = 1;
-    //             outPaths[index].style.opacity = 1;
-    //         });
-    //         thisCircle.addEventListener('mouseout', function(){
-    //             allCircles.map(thisCircle => thisCircle.style.opacity = 1);
-    //             outPaths.map(thisPath => thisPath.style.opacity = 1);
-    //         });
-    //     });
-    //     outPaths.map(outPath => { outputSVG.appendChild(outPath); });
-    //     outCircles.map(outCircle => { outputSVG.appendChild(outCircle); });
-    //     outputSVG.appendChild(targetCircle);
-    // });
 
 })();
