@@ -367,7 +367,7 @@
                                 ((svgSize.width/2)-(rectWidth/2)-2.5) 
                             ) / (maxLength);
             let fillColor = Genres[sGenI].color;
-
+            let curWidth = sGenI < tGenI ? 5 : (-5);
             linInfoSVG.appendChild(
                 createSVGElement('path',{
                     "d": `
@@ -376,11 +376,12 @@
                           ${xPoint4Cur}, ${tGenTopOffset+tConnectLength},
                           ${xPoint}, ${tGenTopOffset+tConnectLength},
                         V ${tGenTopOffset}
-                        C ${xPoint4Cur+5}, ${tGenTopOffset},
-                          ${xPoint4Cur+5}, ${topOffset+sConnectLength},
+                        C ${xPoint4Cur+curWidth}, ${tGenTopOffset},
+                          ${xPoint4Cur+curWidth}, ${topOffset+sConnectLength},
                           ${xPoint}, ${topOffset+sConnectLength},
                     `,
-                    "fill": fillColor
+                    "fill": fillColor,
+                    "opacity": .5
                 })
             );               
     });
