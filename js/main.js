@@ -344,7 +344,13 @@
         
     });
     
-    genresInterConnecting.reverse().forEach(function(
+    genresInterConnecting
+        .sort(function(a,b) { return b[1] - a[1] } )
+        .filter(([a,b]) => (a > b))
+        .concat(
+            genresInterConnecting.filter(([a,b]) => (a < b))
+        )
+        .forEach(function(
         [sGenI,tGenI,tCount,genLength,topOffset,tGenLength,tGenTopOffset]
         ,i,allConnection){
 
@@ -367,7 +373,10 @@
                                 ((svgSize.width/2)-(rectWidth/2)-2.5) 
                             ) / (maxLength);
             let fillColor = Genres[sGenI].color;
-            let curWidth = Math.abs(sConnectLength - tConnectLength) + (tConnectLength < sConnectLength ? tConnectLength : sConnectLength);
+
+            let curWidth = 
+                    Math.abs(sConnectLength - tConnectLength) + 
+                    (tConnectLength < sConnectLength ? tConnectLength : sConnectLength);
             curWidth = sGenI < tGenI ? curWidth : (-curWidth);
 
             let sOffTop = allConnection
