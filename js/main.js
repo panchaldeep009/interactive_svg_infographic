@@ -300,7 +300,50 @@
             })
         );
     });
+    
 
+    // To generate genres connecting pair
+
+    let genresInterConnecting = [];
+    //genresInterConnecting = [ thisGenre Index, connectedGenre Index, total connection, lengthOfGenre, topOffSet]
+    let maxGenresLengthPerMovie = Math.max(...moviesWithGenres
+        .map(movie => movie.genres.length));
+
+    Genres.forEach(function(gen,genI,allGen){
+        allGen.forEach(function(thisGen,thisI){
+            for(var i = 0; i < maxGenresLengthPerMovie; i++){
+                let thisGenMovie = moviesWithGenres
+                    .filter(movie => (movie.genres.length > (i+1)))
+                    .filter(movie => movie.genres[i].includes(gen.Name))
+                    .filter(movie => movie.genres[i+1].includes(thisGen.Name));
+                if(thisGenMovie.length > 0){
+                    let existConnectingPair = genresInterConnecting
+                        .filter(([sGenI, eGenI]) => (sGenI == genI && eGenI == thisI));
+                    if(existConnectingPair.length > 0){
+                        existConnectingPair[0][2] += thisGenMovie.length;
+                    } else {
+                        let genLength = parseFloat(((maxLength*gen.count)/totalCount).toFixed(2)); 
+                        let genTopOffset = parseFloat(( (gap*genI)
+                                            + ( maxLength * allGen
+                                                .slice(0,genI).map(g => g.count)
+                                                .reduce((a, b) => a + b, 0) 
+                                            ) / totalCount ).toFixed(2));
+                        genresInterConnecting.push([ genI, thisI, thisGenMovie.length, genLength, genTopOffset]);
+                    }
+                }
+            }
+        });
+        
+    });
+    
+    console.log(genresInterConnecting);
+    Genres.forEach(function(gen,genI,allGen){
+        let totalConnectCount = 
+            genresInterConnecting
+                .filter(([sGenI,eGenI]) => (sGenI == genI || eGenI == genI))
+                .map(count => count[2])
+                .reduce((a, b) => a + b, 0);  
+    });
 
 
 
