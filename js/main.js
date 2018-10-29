@@ -7,7 +7,7 @@
     let svgSize = { "width": 600, "height": 700 };
 
     // Function to draw Flower type infoGraphic
-    drawCirInfoGData(cirInfoSVG,svgSize,300,400,195,360,50,5,55,270,moviesWithGenres);
+    drawCirInfoGData(cirInfoSVG,svgSize,300,400,195,360,50,5,55,270,moviesWithGenres.slice(0));
     // drawCirInfoGData ( SVG Container, Flower X, Y, Radius, Deg, offDeg, total leafs, leaf Radius, leaf Deg, Data) (fun on line : 98)
     function drawCirInfoGData(cirInfoSVG,svgSize,fX,fY,fR,fDeg,fOffDeg,leafs,lR,lDeg,data){
         //Emptying SVG container
@@ -238,7 +238,7 @@
     // Liner Connecting SVG
 
     let linInfoSVG = document.querySelector("#linerInfographic");
-    svgSize = { "width": 400, "height": 400 };
+    svgSize = { "width": 400, "height": 500 };
 
     //Emptying SVG container
     linInfoSVG.innerHTML = "";
@@ -246,10 +246,22 @@
     linInfoSVG.setAttribute("viewBox",`0 0 ${svgSize.width} ${svgSize.height}`);
 
     let totalCount = Genres.map(g => g.count).reduce((a, b) => a + b, 0);
-    let maxLength = 350;
-    let gap = 3.5;
+    let maxLength = 450;
+    let gap = 2;
     maxLength = maxLength - Genres.length*gap;
-    
+
+    // insert pattern
+    linInfoSVG.innerHTML += 
+    `<defs>
+        <pattern id="pat" 
+        width="4" height="4"
+        patternUnits="userSpaceOnUse"
+        patternTransform="rotate(45)">
+            <rect x="0" y="0" width=".75" height="4" fill="#fff" fill-opacity=".7"></rect>
+            <rect x="0" y="0" width="4" height=".75" fill="#555" fill-opacity=".7"></rect>
+        </pattern>
+    </defs>`;
+
     Genres.forEach(function(gen,i,allGen){
         // Genre rectangle
         linInfoSVG.appendChild(
@@ -259,6 +271,32 @@
                 "width":15,
                 "height": (maxLength*gen.count)/totalCount,
                 "fill": gen.color
+            })
+        );
+        // Select all movies of this genres and get average ratting
+        let averageRating = (
+                moviesWithGenres.filter(movie => movie.genres.includes(gen.Name))
+                .map(m => parseFloat(m.imdbRating))
+                .reduce(function(a, b) { return a + b; }) / gen.count
+            ).toFixed(1);
+        // Draw Rating bar with color
+        linInfoSVG.appendChild(
+            createSVGElement('rect',{
+                "x": (svgSize.width/2)+10,
+                "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
+                "width":(((svgSize.width/2)+10)*averageRating)/10,
+                "height": (maxLength*gen.count)/totalCount,
+                "fill": gen.color
+            })
+        );
+        // Draw Rating bar with pattern
+        linInfoSVG.appendChild(
+            createSVGElement('rect',{
+                "x": (svgSize.width/2)+10,
+                "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
+                "width":(((svgSize.width/2)+10)*averageRating)/10,
+                "height": (maxLength*gen.count)/totalCount,
+                "fill": `url('#pat')`
             })
         );
     });

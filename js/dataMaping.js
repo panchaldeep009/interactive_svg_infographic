@@ -21,7 +21,7 @@ var moviesWithGenres = [];
                     Genres.map(g => { if(g.Name === thisGenre){ g.count++; } });
                 }
             });
-            moviesWithGenres.push({"Name": thisMovie.Title, "genres": thisMovie.Genre.split(', ')});
+            moviesWithGenres.push({"Name": thisMovie.Title, "genres": thisMovie.Genre.split(', '), 'imdbRating': thisMovie.imdbRating});
         }
     });
 
