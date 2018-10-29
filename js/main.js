@@ -285,7 +285,7 @@
             createSVGElement('rect',{
                 "x": (svgSize.width/2)+(rectWidth/2)+2.5,
                 "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
-                "width":(((svgSize.width/2)+10)*(averageRating-2.5))/10,
+                "width":(((svgSize.width/2)+10)*(averageRating-2.5))/7.5,
                 "height": (maxLength*gen.count)/totalCount,
                 "fill": gen.color
             })
@@ -295,7 +295,7 @@
             createSVGElement('rect',{
                 "x": (svgSize.width/2)+(rectWidth/2)+2.5,
                 "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
-                "width":(((svgSize.width/2)+10)*(averageRating-2.5))/10,
+                "width":(((svgSize.width/2)+10)*(averageRating-2.5))/7.5,
                 "height": (maxLength*gen.count)/totalCount,
                 "fill": `url('#pat')`
             })
@@ -367,7 +367,8 @@
                                 ((svgSize.width/2)-(rectWidth/2)-2.5) 
                             ) / (maxLength);
             let fillColor = Genres[sGenI].color;
-            let curWidth = sGenI < tGenI ? 5 : (-5);
+            let curWidth = Math.abs(sConnectLength - tConnectLength) + (tConnectLength < sConnectLength ? tConnectLength : sConnectLength);
+            curWidth = sGenI < tGenI ? curWidth : (-curWidth);
 
             let sOffTop = allConnection
                 .slice(0,i)
@@ -375,7 +376,6 @@
                 .map(c => c[2])
                 .reduce((a, b) => a + b, 0);
                 sOffTop = (sOffTop*genLength)/sConnectCount;
-
                 topOffset = sOffTop + topOffset;
 
             let tOffTop = (allConnection
@@ -388,9 +388,7 @@
                     .map(c => c[2])
                     .reduce((a, b) => a + b, 0)
                 );
-
                 tOffTop = (tOffTop*tGenLength)/tConnectCount;
-
                 tGenTopOffset = tOffTop + tGenTopOffset;
 
             linInfoSVG.appendChild(
