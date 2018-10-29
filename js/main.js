@@ -285,7 +285,7 @@
             createSVGElement('rect',{
                 "x": (svgSize.width/2)+(rectWidth/2)+2.5,
                 "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
-                "width":(((svgSize.width/2)+10)*averageRating)/10,
+                "width":(((svgSize.width/2)+10)*(averageRating-2.5))/10,
                 "height": (maxLength*gen.count)/totalCount,
                 "fill": gen.color
             })
@@ -293,9 +293,9 @@
         // Draw Rating bar with pattern
         linInfoSVG.appendChild(
             createSVGElement('rect',{
-                "x": (svgSize.width/2)+10,
+                "x": (svgSize.width/2)+(rectWidth/2)+2.5,
                 "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
-                "width":(((svgSize.width/2)+10)*averageRating)/10,
+                "width":(((svgSize.width/2)+10)*(averageRating-2.5))/10,
                 "height": (maxLength*gen.count)/totalCount,
                 "fill": `url('#pat')`
             })
@@ -384,7 +384,7 @@
                 .reduce((a, b) => a + b, 0)) +
                 (allConnection
                     .slice(0,i)
-                    .filter(([genI,tGen]) => (tGen == tGenI))
+                    .filter(([,tGen]) => (tGen == tGenI))
                     .map(c => c[2])
                     .reduce((a, b) => a + b, 0)
                 );
@@ -406,7 +406,7 @@
                           ${xPoint}, ${topOffset+sConnectLength},
                     `,
                     "fill": fillColor,
-                    "opacity": .65
+                    "opacity": .75
                 })
             );               
     });
