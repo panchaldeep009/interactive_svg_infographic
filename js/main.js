@@ -248,6 +248,7 @@
     let totalCount = Genres.map(g => g.count).reduce((a, b) => a + b, 0);
     let maxLength = 450;
     let gap = 2;
+    let rectWidth = 15;
     maxLength = maxLength - Genres.length*gap;
 
     // insert pattern
@@ -266,9 +267,9 @@
         // Genre rectangle
         linInfoSVG.appendChild(
             createSVGElement('rect',{
-                "x": (svgSize.width/2)-7.5,
+                "x": (svgSize.width/2)-(rectWidth/2),
                 "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
-                "width":15,
+                "width":rectWidth,
                 "height": (maxLength*gen.count)/totalCount,
                 "fill": gen.color
             })
@@ -282,7 +283,7 @@
         // Draw Rating bar with color
         linInfoSVG.appendChild(
             createSVGElement('rect',{
-                "x": (svgSize.width/2)+10,
+                "x": (svgSize.width/2)+(rectWidth/2)+2.5,
                 "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
                 "width":(((svgSize.width/2)+10)*averageRating)/10,
                 "height": (maxLength*gen.count)/totalCount,
@@ -328,7 +329,14 @@
                                                 .slice(0,genI).map(g => g.count)
                                                 .reduce((a, b) => a + b, 0) 
                                             ) / totalCount ).toFixed(2));
-                        genresInterConnecting.push([ genI, thisI, thisGenMovie.length, genLength, genTopOffset]);
+                        
+                        let tGenLength = parseFloat(((maxLength*thisGen.count)/totalCount).toFixed(2)); 
+                        let tGenTopOffset = parseFloat(( (gap*thisI)
+                                            + ( maxLength * allGen
+                                                .slice(0,thisI).map(g => g.count)
+                                                .reduce((a, b) => a + b, 0) 
+                                            ) / totalCount ).toFixed(2));
+                        genresInterConnecting.push([ genI, thisI, thisGenMovie.length, genLength, genTopOffset, tGenLength, tGenTopOffset]);
                     }
                 }
             }
@@ -336,14 +344,47 @@
         
     });
     
-    console.log(genresInterConnecting);
-    Genres.forEach(function(gen,genI,allGen){
-        let totalConnectCount = 
-            genresInterConnecting
-                .filter(([sGenI,eGenI]) => (sGenI == genI || eGenI == genI))
+    genresInterConnecting.forEach(function(
+        [sGenI,tGenI,tCount,genLength,topOffset,tGenLength,tGenTopOffset]
+        ,i,allConnection){
+
+            let sConnectCount = allConnection
+                .filter(([sI,tI]) => (sI == sGenI || tI == sGenI))
                 .map(count => count[2])
-                .reduce((a, b) => a + b, 0);  
+                .reduce((a, b) => a + b, 0);
+            let sConnectLength = (tCount*genLength)/sConnectCount;
+            
+            let tConnectCount = allConnection
+                .filter(([sI,tI]) => (sI == tGenI || tI == tGenI))
+                .map(count => count[2])
+                .reduce((a, b) => a + b, 0);
+            let tConnectLength = (tCount*tGenLength)/tConnectCount;
+
+            let xPoint = (svgSize.width/2)-(rectWidth/2)-2.5;
+            let xPoint4Cur = ((svgSize.width/2)-(rectWidth/2)-2.5) -
+                            (
+                                Math.abs(topOffset - tGenTopOffset ) *
+                                ((svgSize.width/2)-(rectWidth/2)-2.5) 
+                            ) / (maxLength);
+            let fillColor = Genres[sGenI].color;
+
+            linInfoSVG.appendChild(
+                createSVGElement('path',{
+                    "d": `
+                        M ${xPoint} ${topOffset}
+                        C ${xPoint4Cur}, ${topOffset},
+                          ${xPoint4Cur}, ${tGenTopOffset+tConnectLength},
+                          ${xPoint}, ${tGenTopOffset+tConnectLength},
+                        V ${tGenTopOffset}
+                        C ${xPoint4Cur+5}, ${tGenTopOffset},
+                          ${xPoint4Cur+5}, ${topOffset+sConnectLength},
+                          ${xPoint}, ${topOffset+sConnectLength},
+                    `,
+                    "fill": fillColor
+                })
+            );               
     });
+
 
 
 
