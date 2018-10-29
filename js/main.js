@@ -344,7 +344,7 @@
         
     });
     
-    genresInterConnecting.forEach(function(
+    genresInterConnecting.reverse().forEach(function(
         [sGenI,tGenI,tCount,genLength,topOffset,tGenLength,tGenTopOffset]
         ,i,allConnection){
 
@@ -368,6 +368,31 @@
                             ) / (maxLength);
             let fillColor = Genres[sGenI].color;
             let curWidth = sGenI < tGenI ? 5 : (-5);
+
+            let sOffTop = allConnection
+                .slice(0,i)
+                .filter(([genI]) => (genI == sGenI))
+                .map(c => c[2])
+                .reduce((a, b) => a + b, 0);
+                sOffTop = (sOffTop*genLength)/sConnectCount;
+
+                topOffset = sOffTop + topOffset;
+
+            let tOffTop = (allConnection
+                .filter(([genI]) => (genI == tGenI))
+                .map(c => c[2])
+                .reduce((a, b) => a + b, 0)) +
+                (allConnection
+                    .slice(0,i)
+                    .filter(([genI,tGen]) => (tGen == tGenI))
+                    .map(c => c[2])
+                    .reduce((a, b) => a + b, 0)
+                );
+
+                tOffTop = (tOffTop*tGenLength)/tConnectCount;
+
+                tGenTopOffset = tOffTop + tGenTopOffset;
+
             linInfoSVG.appendChild(
                 createSVGElement('path',{
                     "d": `
@@ -381,7 +406,7 @@
                           ${xPoint}, ${topOffset+sConnectLength},
                     `,
                     "fill": fillColor,
-                    "opacity": .5
+                    "opacity": .65
                 })
             );               
     });
