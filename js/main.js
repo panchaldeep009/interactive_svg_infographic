@@ -295,7 +295,8 @@
                 "y": topSpacing+(gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
                 "width":rectWidth,
                 "height": (maxLength*gen.count)/totalCount,
-                "fill": gen.color
+                "fill": gen.color,
+                "data-genre-hover-i": i
             })
         );
         // Select all movies of this genres and get average ratting
@@ -311,7 +312,8 @@
                 "y": topSpacing+(gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
                 "width":(((svgSize.width/2)+10)*(averageRating-2.5))/7.5,
                 "height": (maxLength*gen.count)/totalCount,
-                "fill": gen.color
+                "fill": gen.color,
+                "data-genre-hover-i": i
             })
         );
         // Draw Rating bar with pattern
@@ -321,7 +323,8 @@
                 "y": topSpacing+(gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
                 "width":(((svgSize.width/2)+10)*(averageRating-2.5))/7.5,
                 "height": (maxLength*gen.count)/totalCount,
-                "fill": `url('#pat')`
+                "fill": `url('#pat')`,
+                "data-genre-hover-i": i
             })
         );
     });
@@ -438,12 +441,44 @@
                             ${xPoint}, ${topOffset+sConnectLength},
                     `,
                     "fill": fillColor,
-                    "opacity": .75
+                    "opacity": .75,
+                    "data-genre-i": sGenI
                 })
             );               
     });
 
+    /// Mouse Hover 
     
+    linInfoSVG.querySelectorAll('[data-genre-hover-i]').forEach(thisElement => {
+        thisElement.addEventListener('mouseover', function(){
+            linInfoSVG.querySelectorAll('[data-genre-hover-i], [data-genre-i]')
+            .forEach(onOfElement => {
+
+                if(onOfElement.dataset.genreI == thisElement.dataset.genreHoverI || 
+                    onOfElement.dataset.genreHoverI == thisElement.dataset.genreHoverI){
+                    onOfElement.style.opacity = 1; }
+                else {
+                    onOfElement.style.opacity = 0.025; }
+            });
+                    
+            genresInterConnecting
+                .filter(([gI,tGI]) => (gI == thisElement.dataset.genreHoverI || tGI == thisElement.dataset.genreHoverI ))
+                .forEach(([,gI]) => {
+                    linInfoSVG.querySelectorAll(`[data-genre-hover-i="${gI}"]`)
+                    .forEach(e => {
+                        e.style.opacity = 1;
+                    });
+                });
+        });
+
+        thisElement.addEventListener('mouseout', function(){
+            linInfoSVG.querySelectorAll('[data-genre-hover-i], [data-genre-i]')
+            .forEach(onOfElement => {
+                onOfElement.style.opacity = 1;
+            })
+        });
+    });
+
     // Measuring lines
     linInfoSVG.appendChild(
         createSVGElement('rect',{

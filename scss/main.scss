@@ -62,7 +62,9 @@ body{
             font: normal 8px sans-serif;
             fill: #FFF;
         }
-        [data-hover-movie],[data-hover-genre]{
+        [data-hover-movie],
+        [data-hover-genre],
+        [data-genre-hover-i]{
             cursor: pointer;
         }
     }
@@ -99,7 +101,9 @@ body{
     height: max-content;
     background-color: rgba(#333, .65);
     border: 3px solid rgba(#333, .85);
+    border-radius: 10px;
     align-items: center;
+    padding: 5px;
     img{
         height: 150px;
     }
