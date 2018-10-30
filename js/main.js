@@ -232,6 +232,7 @@
 
             movieInfo.querySelector("img").src = movieData.Poster;
             movieInfo.querySelector("h4").innerHTML = movieData.Name;
+            movieInfo.querySelector("span").innerHTML = movieData.Year;
             movieInfo.querySelector("p").innerHTML = movieData.Plot;
 
             
