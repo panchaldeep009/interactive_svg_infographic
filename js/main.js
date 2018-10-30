@@ -238,7 +238,7 @@
             movieInfo.style.display = 'flex';
             movieInfo.style.display = 'flex';
             movieInfo.style.top = e.clientY+20+'px';
-            
+
             let docWidth = document.body.clientWidth;
             movieInfo.style.left =
                 (e.clientX+20) > (docWidth-400) ?
@@ -254,7 +254,7 @@
                 oneOfElement.style.opacity = 1;
             });
             movieInfo.style.display = 'none';
-            movieInfo.querySelector("img").src = '';
+            movieInfo.querySelector("img").src = 'images/poster.jpg';
         });
     });
 
