@@ -235,16 +235,15 @@
             movieInfo.querySelector("span").innerHTML = movieData.Year;
             movieInfo.querySelector("p").innerHTML = movieData.Plot;
 
-            
-            movieInfo.style.display = 'flex';
-            movieInfo.style.display = 'flex';
-            movieInfo.style.top = e.clientY+20+'px';
-
             let docWidth = document.body.clientWidth;
-            movieInfo.style.left =
-                (e.clientX+20) > (docWidth-400) ?
-                (docWidth-400) : (e.clientX+20)
-            +'px';
+            movieInfo.style.cssText = `
+                display: flex;
+                top: ${e.clientY+20}px;
+                left: ${
+                    (e.clientX+20) > (docWidth-400) ?
+                    (docWidth-400) : (e.clientX+20)
+                }px;
+            `;
         });
 
         thisElement.addEventListener('mouseout', function(){
@@ -273,6 +272,7 @@
     let maxLength = 450;
     let gap = 2;
     let rectWidth = 15;
+    let topSpacing = 30;
     maxLength = maxLength - Genres.length*gap;
 
     // insert pattern
@@ -292,7 +292,7 @@
         linInfoSVG.appendChild(
             createSVGElement('rect',{
                 "x": (svgSize.width/2)-(rectWidth/2),
-                "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
+                "y": topSpacing+(gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
                 "width":rectWidth,
                 "height": (maxLength*gen.count)/totalCount,
                 "fill": gen.color
@@ -308,7 +308,7 @@
         linInfoSVG.appendChild(
             createSVGElement('rect',{
                 "x": (svgSize.width/2)+(rectWidth/2)+2.5,
-                "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
+                "y": topSpacing+(gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
                 "width":(((svgSize.width/2)+10)*(averageRating-2.5))/7.5,
                 "height": (maxLength*gen.count)/totalCount,
                 "fill": gen.color
@@ -318,7 +318,7 @@
         linInfoSVG.appendChild(
             createSVGElement('rect',{
                 "x": (svgSize.width/2)+(rectWidth/2)+2.5,
-                "y": (gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
+                "y": topSpacing+(gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount,
                 "width":(((svgSize.width/2)+10)*(averageRating-2.5))/7.5,
                 "height": (maxLength*gen.count)/totalCount,
                 "fill": `url('#pat')`
@@ -348,14 +348,14 @@
                         existConnectingPair[0][2] += thisGenMovie.length;
                     } else {
                         let genLength = parseFloat(((maxLength*gen.count)/totalCount).toFixed(2)); 
-                        let genTopOffset = parseFloat(( (gap*genI)
+                        let genTopOffset = topSpacing+parseFloat(( (gap*genI)
                                             + ( maxLength * allGen
                                                 .slice(0,genI).map(g => g.count)
                                                 .reduce((a, b) => a + b, 0) 
                                             ) / totalCount ).toFixed(2));
                         
                         let tGenLength = parseFloat(((maxLength*thisGen.count)/totalCount).toFixed(2)); 
-                        let tGenTopOffset = parseFloat(( (gap*thisI)
+                        let tGenTopOffset = topSpacing+parseFloat(( (gap*thisI)
                                             + ( maxLength * allGen
                                                 .slice(0,thisI).map(g => g.count)
                                                 .reduce((a, b) => a + b, 0) 
@@ -394,7 +394,8 @@
             let xPoint4Cur = ((svgSize.width/2)-(rectWidth/2)-2.5) -
                             (
                                 Math.abs(topOffset - tGenTopOffset ) *
-                                ((svgSize.width/2)-(rectWidth/2)-2.5) 
+                                (svgSize.width/1.5)
+                                // Ideal ((svgSize.width/2)-(rectWidth/2)-2.5) 
                             ) / (maxLength);
             let fillColor = Genres[sGenI].color;
 
@@ -428,13 +429,13 @@
                 createSVGElement('path',{
                     "d": `
                         M ${xPoint} ${topOffset}
-                        C ${xPoint4Cur}, ${topOffset},
-                          ${xPoint4Cur}, ${tGenTopOffset+tConnectLength},
-                          ${xPoint}, ${tGenTopOffset+tConnectLength},
+                        C   ${xPoint4Cur}, ${topOffset},
+                            ${xPoint4Cur}, ${tGenTopOffset+tConnectLength},
+                            ${xPoint}, ${tGenTopOffset+tConnectLength},
                         V ${tGenTopOffset}
-                        C ${xPoint4Cur+curWidth}, ${tGenTopOffset},
-                          ${xPoint4Cur+curWidth}, ${topOffset+sConnectLength},
-                          ${xPoint}, ${topOffset+sConnectLength},
+                        C   ${xPoint4Cur+curWidth}, ${tGenTopOffset},
+                            ${xPoint4Cur+curWidth}, ${topOffset+sConnectLength},
+                            ${xPoint}, ${topOffset+sConnectLength},
                     `,
                     "fill": fillColor,
                     "opacity": .75
@@ -442,6 +443,82 @@
             );               
     });
 
+    
+    // Measuring lines
+    linInfoSVG.appendChild(
+        createSVGElement('rect',{
+            "x": (svgSize.width/2)+(rectWidth/2)+2.5,
+            "y": topSpacing-5,
+            "width":(svgSize.width/2),
+            "height": 1,
+            "fill": '#FFF'
+        })
+    );
+    for(let i = 5; i >= 0; i--){
+        linInfoSVG.appendChild(
+            createSVGElement('rect',{
+                "x": ((svgSize.width/2)+(rectWidth/2)+2.5)
+                    +((((svgSize.width/2)-(rectWidth/2))/5)*(i)),
+                "y": (topSpacing-5)-8,
+                "width":.25,
+                "height": svgSize.height - 30,
+                "fill": '#FFF'
+            })
+        );    
+        linInfoSVG.appendChild(
+            createSVGElement('text',{
+                "x": ((svgSize.width/2)+(rectWidth/2)+2.5)
+                    +((((svgSize.width/2)-(rectWidth/2))/5)*(i))+5,
+                "y": (topSpacing-5)-3,
+                "class": 'smallText'
+            }, i*2)
+        );
+    }
+
+    linInfoSVG.appendChild(
+        createSVGElement('text',{
+            "x": (svgSize.width/4)-40,
+            "y": 6,
+            "class": 'mediumText'
+        }, 'Interconnecting Genres')
+    );
+    
+    linInfoSVG.appendChild(
+        createSVGElement('text',{
+            "x": ((svgSize.width/4)*3)-30,
+            "y": 6,
+            "class": 'mediumText'
+        }, 'Genres Ratings')
+    );
+
+    linInfoSVG.appendChild(
+        createSVGElement('rect',{
+            "x": 0,
+            "y": (topSpacing-5)-8,
+            "width":.25,
+            "height": svgSize.height - 30,
+            "fill": '#FFF'
+        })
+    );
+    
+    linInfoSVG.appendChild(
+        createSVGElement('rect',{
+            "x": (svgSize.width/2)-(rectWidth/2)-2.5,
+            "y": (topSpacing-5)-8,
+            "width":.25,
+            "height": svgSize.height - 30,
+            "fill": '#FFF'
+        })
+    );
+    linInfoSVG.appendChild(
+        createSVGElement('rect',{
+            "x": 0,
+            "y": topSpacing-5,
+            "width":(svgSize.width/2)-(rectWidth/2)-2.5,
+            "height": 1,
+            "fill": '#FFF'
+        })
+    );
 
 
 

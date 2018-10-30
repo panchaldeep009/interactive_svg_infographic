@@ -54,6 +54,14 @@ body{
             font: normal 8px sans-serif;
             fill: #FFF;
         }
+        .smallText{
+            font: normal 6px sans-serif;
+            fill: #FFF;
+        }
+        .mediumText{
+            font: normal 8px sans-serif;
+            fill: #FFF;
+        }
         [data-hover-movie],[data-hover-genre]{
             cursor: pointer;
         }
