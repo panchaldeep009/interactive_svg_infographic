@@ -343,6 +343,7 @@
 
     let genresInterConnecting = [];
     //genresInterConnecting = [ thisGenre Index, connectedGenre Index, total connection, lengthOfGenre, topOffSet]
+    
     let maxGenresLengthPerMovie = Math.max(...moviesInfo
         .map(movie => movie.genres.length));
 
@@ -379,7 +380,8 @@
         });
         
     });
-    
+
+    // Drawing connection Path
     genresInterConnecting
         .sort(function(a,b) { return b[1] - a[1] } )
         .filter(([a,b]) => (a > b))
@@ -517,18 +519,9 @@
             });
             genInfo.style.display = `none`;
         });
-
-        // movieData.genres.forEach(gen => {
-        //     let thisGen = Genres.find(g => (g.Name == gen));
-        //     movieInfo.querySelector("ul").innerHTML 
-        //         += `<li>
-        //                 <strong style="background-color:${thisGen.color}"></strong>
-        //                 ${thisGen.Name}
-        //             </li>`;
-        // });
     });
 
-    // Measuring lines
+    // Drawing Measuring lines
     linInfoSVG.appendChild(
         createSVGElement('rect',{
             "x": (svgSize.width/2)+(rectWidth/2)+2.5,
