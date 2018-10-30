@@ -228,12 +228,21 @@
             })
 
             // change movies info
-            let movieData = moviesInfo.filter(m => (m.Name == thisElement.dataset.hoverMovie))[0];
-
+            let movieData = moviesInfo.find(m => (m.Name == thisElement.dataset.hoverMovie));
+            
             movieInfo.querySelector("img").src = movieData.Poster;
             movieInfo.querySelector("h4").innerHTML = movieData.Name;
             movieInfo.querySelector("span").innerHTML = movieData.Year;
             movieInfo.querySelector("p").innerHTML = movieData.Plot;
+            movieInfo.querySelector("ul").innerHTML = "";
+            movieData.genres.forEach(gen => {
+                let thisGen = Genres.find(g => (g.Name == gen));
+                movieInfo.querySelector("ul").innerHTML 
+                    += `<li>
+                            <strong style="background-color:${thisGen.color}"></strong>
+                            ${thisGen.Name}
+                        </li>`;
+            });
 
             let docWidth = document.body.clientWidth;
             movieInfo.style.cssText = `
@@ -352,17 +361,17 @@
                     } else {
                         let genLength = parseFloat(((maxLength*gen.count)/totalCount).toFixed(2)); 
                         let genTopOffset = topSpacing+parseFloat(( (gap*genI)
-                                            + ( maxLength * allGen
-                                                .slice(0,genI).map(g => g.count)
-                                                .reduce((a, b) => a + b, 0) 
-                                            ) / totalCount ).toFixed(2));
+                            + ( maxLength * allGen
+                                .slice(0,genI).map(g => g.count)
+                                .reduce((a, b) => a + b, 0) 
+                            ) / totalCount ).toFixed(2));
                         
                         let tGenLength = parseFloat(((maxLength*thisGen.count)/totalCount).toFixed(2)); 
                         let tGenTopOffset = topSpacing+parseFloat(( (gap*thisI)
-                                            + ( maxLength * allGen
-                                                .slice(0,thisI).map(g => g.count)
-                                                .reduce((a, b) => a + b, 0) 
-                                            ) / totalCount ).toFixed(2));
+                            + ( maxLength * allGen
+                                .slice(0,thisI).map(g => g.count)
+                                .reduce((a, b) => a + b, 0) 
+                            ) / totalCount ).toFixed(2));
                         genresInterConnecting.push([ genI, thisI, thisGenMovie.length, genLength, genTopOffset, tGenLength, tGenTopOffset]);
                     }
                 }
@@ -450,7 +459,10 @@
     /// Mouse Hover 
     
     linInfoSVG.querySelectorAll('[data-genre-hover-i]').forEach(thisElement => {
-        thisElement.addEventListener('mouseover', function(){
+        // Genres info container
+        let genInfo = document.querySelector("#genInfo");
+
+        thisElement.addEventListener('mouseover', function(e){
             linInfoSVG.querySelectorAll('[data-genre-hover-i], [data-genre-i]')
             .forEach(onOfElement => {
 
@@ -469,14 +481,51 @@
                         e.style.opacity = 1;
                     });
                 });
+
+            let thisGen = Genres[thisElement.dataset.genreHoverI];
+            genInfo.querySelector("h4").innerHTML = `
+                    <strong style="background-color:${thisGen.color}"></strong>
+                    ${thisGen.Name}`;
+
+            genInfo.querySelector("ul").innerHTML = ``;
+            genresInterConnecting
+                .filter(([gI]) => (gI == thisElement.dataset.genreHoverI))
+                .reverse()
+                .forEach(([,tGI]) => {
+                    let thisGen = Genres[tGI];
+                    genInfo.querySelector("ul").innerHTML 
+                        += `<li>
+                                <strong style="background-color:${thisGen.color}"></strong>
+                                ${thisGen.Name}
+                            </li>`;
+                });
+            let docWidth = document.body.clientWidth;
+            genInfo.style.cssText = `
+                display: flex;
+                top: ${e.clientY+20}px;
+                left: ${
+                    (e.clientX+20) > (docWidth-400) ?
+                    (docWidth-400) : (e.clientX+20)
+                }px;
+            `;
         });
 
         thisElement.addEventListener('mouseout', function(){
             linInfoSVG.querySelectorAll('[data-genre-hover-i], [data-genre-i]')
             .forEach(onOfElement => {
                 onOfElement.style.opacity = 1;
-            })
+            });
+            genInfo.style.display = `none`;
         });
+
+        // movieData.genres.forEach(gen => {
+        //     let thisGen = Genres.find(g => (g.Name == gen));
+        //     movieInfo.querySelector("ul").innerHTML 
+        //         += `<li>
+        //                 <strong style="background-color:${thisGen.color}"></strong>
+        //                 ${thisGen.Name}
+        //             </li>`;
+        // });
     });
 
     // Measuring lines
