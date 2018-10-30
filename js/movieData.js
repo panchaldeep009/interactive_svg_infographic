@@ -1664,7 +1664,7 @@ var MovieData = [
         "Poster": "https://images-na.ssl-images-amazon.com/images/M/MV5BMjAzODEzODkxNl5BMl5BanBnXkFtZTgwMTY5OTE5MDE@._V1_SX300.jpg",
         "Ratings": [],
         "Metascore": "N/A",
-        "imdbRating": "N/A",
+        "imdbRating": "7.4",
         "imdbVotes": "N/A",
         "imdbID": "tt3313776",
         "Type": "movie",
