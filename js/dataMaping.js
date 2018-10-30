@@ -1,7 +1,7 @@
 "use strict";
 
 var Genres = [];
-var moviesWithGenres = [];
+var moviesInfo = [];
 
 (() => {
     var differentColors = [
@@ -21,13 +21,19 @@ var moviesWithGenres = [];
                     Genres.map(g => { if(g.Name === thisGenre){ g.count++; } });
                 }
             });
-            moviesWithGenres.push({"Name": thisMovie.Title, "genres": thisMovie.Genre.split(', '), 'imdbRating': thisMovie.imdbRating});
+            moviesInfo.push({
+                "Name": thisMovie.Title,
+                "Year": thisMovie.Year,
+                "genres": thisMovie.Genre.split(', '),
+                "imdbRating": thisMovie.imdbRating,
+                "Poster":thisMovie.Poster,
+                "Plot":thisMovie.Plot});
         }
     });
 
     // Sort Genres By it's coming
     Genres = Genres.sort(function(a,b) { return b.count - a.count });
-    moviesWithGenres = moviesWithGenres.sort(
+    moviesInfo = moviesInfo.sort(
         function () { return Math.floor(Math.random()*3)-1; }
     );
 })();

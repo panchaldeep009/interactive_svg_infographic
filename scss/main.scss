@@ -11,18 +11,26 @@ body{
 #infoGraphics{
     position: relative;
     max-width:1000px;
-    width: 100%;
-    margin-left: 50%;
+    width: 90%;
     padding-top: 30px;
+    margin-left: 50%;
     @include transform(
         translateX(-50%)
     );
-    h2{
-        text-align: center;
+    h1, h2{
+        width: max-content;
+        margin-left: 50%;
+        @include transform(
+            translateX(-50%)
+        );
         font-size: 35px;
         color: white;
         border-bottom: 1px solid #FFF;
-        padding: 25px;
+        padding: 25px 35px;
+    }
+    h2{
+        padding: 20px 35px;
+        font-size: 20px;
     }
     #circularInfographic, #linerInfographic{
         width: 100%;
@@ -71,6 +79,37 @@ body{
         p{
             text-align: right;
             color: #FFF;
+        }
+    }
+}
+#movieInfo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    max-width: 400px;
+    height: max-content;
+    background-color: rgba(#333, .65);
+    border: 3px solid rgba(#333, .85);
+    align-items: center;
+    img{
+        height: 150px;
+    }
+    #info{
+        padding: 1em;
+        display: inline;
+        color: white;
+        h4{
+            font-size: 20px;
+            padding: .5em 0;
+        }
+        span{
+            font-size: 18px;
+            font-weight: 600;
+        }
+        p{
+            font-size: 12px;
+            padding: .5em 0;
         }
     }
 }

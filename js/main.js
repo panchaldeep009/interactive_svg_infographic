@@ -2,12 +2,12 @@
 (() => {
     //// Circular Connecting InfoGraphic SVG
     // SVG container
-    let cirInfoSVG = document.querySelector("#circularInfographic");
+    var cirInfoSVG = document.querySelector("#circularInfographic");
     // Size of container
-    let svgSize = { "width": 600, "height": 700 };
+    var svgSize = { "width": 600, "height": 700 };
 
     // Function to draw Flower type infoGraphic
-    drawCirInfoGData(cirInfoSVG,svgSize,300,400,195,360,50,5,55,270,moviesWithGenres.slice(0));
+    drawCirInfoGData(cirInfoSVG,svgSize,300,400,195,360,50,5,55,270,moviesInfo.slice(0));
     // drawCirInfoGData ( SVG Container, Flower X, Y, Radius, Deg, offDeg, total leafs, leaf Radius, leaf Deg, Data) (fun on line : 98)
     function drawCirInfoGData(cirInfoSVG,svgSize,fX,fY,fR,fDeg,fOffDeg,leafs,lR,lDeg,data){
         //Emptying SVG container
@@ -208,7 +208,10 @@
 
     // On hover movie names
     cirInfoSVG.querySelectorAll('[data-hover-movie]').forEach(thisElement => {
-        thisElement.addEventListener('mouseover', function(){
+        // movie info container
+        let movieInfo = document.querySelector("#movieInfo");
+
+        thisElement.addEventListener('mouseover', function(e){
             cirInfoSVG.querySelectorAll('[data-movie]').forEach(oneOfElement => {
                 if(thisElement.dataset.hoverMovie == oneOfElement.dataset.movie){
                     oneOfElement.style.opacity = 1;
@@ -223,6 +226,24 @@
                     oneOfElement.style.opacity = 0.025;
                 }
             })
+
+            // change movies info
+            let movieData = moviesInfo.filter(m => (m.Name == thisElement.dataset.hoverMovie))[0];
+
+            movieInfo.querySelector("img").src = movieData.Poster;
+            movieInfo.querySelector("h4").innerHTML = movieData.Name;
+            movieInfo.querySelector("p").innerHTML = movieData.Plot;
+
+            
+            movieInfo.style.display = 'flex';
+            movieInfo.style.display = 'flex';
+            movieInfo.style.top = e.clientY+20+'px';
+            
+            let docWidth = document.body.clientWidth;
+            movieInfo.style.left =
+                (e.clientX+20) > (docWidth-400) ?
+                (docWidth-400) : (e.clientX+20)
+            +'px';
         });
 
         thisElement.addEventListener('mouseout', function(){
@@ -232,12 +253,14 @@
             cirInfoSVG.querySelectorAll('[data-hover-genre]').forEach(oneOfElement => {
                 oneOfElement.style.opacity = 1;
             });
+            movieInfo.style.display = 'none';
+            movieInfo.querySelector("img").src = '';
         });
     });
 
     // Liner Connecting SVG
 
-    let linInfoSVG = document.querySelector("#linerInfographic");
+    var linInfoSVG = document.querySelector("#linerInfographic");
     svgSize = { "width": 400, "height": 500 };
 
     //Emptying SVG container
@@ -276,7 +299,7 @@
         );
         // Select all movies of this genres and get average ratting
         let averageRating = (
-                moviesWithGenres.filter(movie => movie.genres.includes(gen.Name))
+            moviesInfo.filter(movie => movie.genres.includes(gen.Name))
                 .map(m => parseFloat(m.imdbRating))
                 .reduce(function(a, b) { return a + b; }) / gen.count
             ).toFixed(1);
@@ -307,13 +330,13 @@
 
     let genresInterConnecting = [];
     //genresInterConnecting = [ thisGenre Index, connectedGenre Index, total connection, lengthOfGenre, topOffSet]
-    let maxGenresLengthPerMovie = Math.max(...moviesWithGenres
+    let maxGenresLengthPerMovie = Math.max(...moviesInfo
         .map(movie => movie.genres.length));
 
     Genres.forEach(function(gen,genI,allGen){
         allGen.forEach(function(thisGen,thisI){
             for(var i = 0; i < maxGenresLengthPerMovie; i++){
-                let thisGenMovie = moviesWithGenres
+                let thisGenMovie = moviesInfo
                     .filter(movie => (movie.genres.length > (i+1)))
                     .filter(movie => movie.genres[i].includes(gen.Name))
                     .filter(movie => movie.genres[i+1].includes(thisGen.Name));
