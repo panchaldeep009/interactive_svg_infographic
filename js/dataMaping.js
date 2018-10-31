@@ -3,7 +3,7 @@
 var Genres = [];
 var moviesInfo = [];
 
-(() => {
+function dataReMap(){
     var differentColors = [
         "#e6194B","#3cb44b","#ffe119","#4363d8","#f58231",
         "#e6beff","#42d4f4","#f032e6","#bfef45","#fabebe",
@@ -12,7 +12,16 @@ var moviesInfo = [];
         "#ffffff","#000000"
     ];
     // Find all Genres and Title
-    MovieData.forEach(thisMovie => {
+    MovieData
+        .filter(movie => (
+            movie.Genre != null &&
+            movie.imdbRating != null &&
+            movie.imdbRating != 'N/A' &&
+            movie.Title != null &&
+            movie.Year != null &&
+            movie.Plot != null
+        ))
+        .forEach(thisMovie => {
         if(thisMovie.Response != "False"){
             thisMovie.Genre.split(', ').forEach(function (thisGenre,i){
                 if (Genres.filter(g => g.Name === thisGenre).length <= 0) {
@@ -36,5 +45,4 @@ var moviesInfo = [];
     moviesInfo = moviesInfo.sort(
         function () { return Math.floor(Math.random()*3)-1; }
     );
-    console.log(moviesInfo.length);
-})();
+}

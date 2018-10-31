@@ -1,7 +1,32 @@
 "use strict";
+(()=>{
 
+// fetch data
+DataFetch(
+    // call back
+    dataReady
+);
+
+})();
 
 // FUNCTIONS 
+
+async function dataReady() {
+    await dataReMap();
+    await drawPostersBackground();
+    await drawFlowerGraph();
+    await drawInterConnectingGraph();
+    await unHidePreLoader();
+}
+
+function unHidePreLoader(){
+    document.body.style.overflowY = 'auto';
+    const mainContent = document.querySelector('#infoGraphics');
+    mainContent.style.opacity = '1';
+    mainContent.style.pointerEvents = 'auto';
+    const preLoader = document.querySelector('#preLoader');
+    preLoader.style.opacity = '0';
+}
 
 function createSVGElement(tag,attributes,content){
     let element = document.createElementNS("http://www.w3.org/2000/svg", tag);
@@ -18,7 +43,7 @@ function createSVGElement(tag,attributes,content){
 
 
 // Draw Posters in background 
-(() => {
+function drawPostersBackground(){
     const posterBackground = document.querySelector('#posterBackground');
     posterBackground.setAttribute("viewBox",`0 0 ${posterBackground.getBoundingClientRect().width} ${posterBackground.getBoundingClientRect().height}`);
     
@@ -66,6 +91,11 @@ function createSVGElement(tag,attributes,content){
     
         let posterPosX = 0;
         let posterPosY = 0
+        
+        // Shuffle Posters in background
+        for (var i = posterBackground.children.length; i >= 0; i--) {
+            posterBackground.appendChild(posterBackground.children[Math.random() * i | 0]);
+        }
     
         posterBackground.querySelectorAll('image').forEach(poster => {
 
@@ -84,4 +114,4 @@ function createSVGElement(tag,attributes,content){
         });
     }
 
-})();
+}

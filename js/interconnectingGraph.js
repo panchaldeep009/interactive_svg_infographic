@@ -1,6 +1,6 @@
 "use strict";
 
-(() => {
+function drawInterConnectingGraph(){
     // Liner Connecting SVG
 
     const linInfoSVG = document.querySelector("#linerInfographic");
@@ -332,4 +332,4 @@
         })
     );
 
-})();
+}

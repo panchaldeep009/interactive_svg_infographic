@@ -1,5 +1,5 @@
 "use strict";
-(() => {
+function drawFlowerGraph(){
 
     //// Circular Connecting InfoGraphic SVG
     // SVG container
@@ -267,4 +267,4 @@
             movieInfo.querySelector("img").src = 'images/poster.jpg';
         });
     });
-})();
+}
