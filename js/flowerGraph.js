@@ -49,9 +49,9 @@ function drawFlowerGraph(){
             // List Genres on top
             cirInfoSVG.appendChild(
                 createSVGElement('text',{
-                    "x": 15+(15*genI),
+                    "x": 15+(15*genI)+120,
                     "y": 75,
-                    "style":`transform: rotate(-60deg); transform-origin: ${15+(15*genI)}px ${75}px`,
+                    "style":`transform: rotate(-60deg); transform-origin: ${15+(15*genI)+120}px ${75}px`,
                     "class": "genName",
                     "data-genre":genre.Name,
                     "data-hover-genre":genre.Name,
@@ -61,7 +61,7 @@ function drawFlowerGraph(){
             // List circles and colors of Genres on top
             cirInfoSVG.appendChild(
                 createSVGElement('circle',{
-                    "cx": 20+(15*genI),
+                    "cx": 20+(15*genI)+120,
                     "cy": 55,
                     "fill":genre.color,
                     "data-genre":genre.Name,

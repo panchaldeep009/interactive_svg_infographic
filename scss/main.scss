@@ -92,6 +92,10 @@ body{
             font: normal 8px sans-serif;
             fill: #FFF;
         }
+        .bold{
+            fill: #EEE;
+            font-weight: 600;
+        }
         [data-hover-movie],
         [data-hover-genre],
         [data-genre-hover-i]{

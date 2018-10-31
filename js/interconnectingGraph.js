@@ -70,6 +70,30 @@ function drawInterConnectingGraph(){
                 "data-genre-hover-i": i
             })
         );
+
+        if(((maxLength*gen.count)/totalCount) > 8){
+            // Genres Label  
+            linInfoSVG.appendChild(
+                createSVGElement('rect',{
+                    "x": (svgSize.width/2)+(rectWidth/2)+5.5,
+                    "y": (topSpacing+(gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount)+(((maxLength*gen.count)/totalCount)/2)-7,
+                    "width":55,
+                    "height": 14,
+                    "fill": `#555`,
+                    "rx": 3,
+                    "ry": 3,
+                    "data-genre-i": i
+                },gen.Name)
+            );
+            linInfoSVG.appendChild(
+                createSVGElement('text',{
+                    "x": (svgSize.width/2)+(rectWidth/2)+10,
+                    "y": (topSpacing+(gap*i)+(maxLength* allGen.slice(0,i).map(g => g.count).reduce((a, b) => a + b, 0) )/totalCount)+(((maxLength*gen.count)/totalCount)/2)+2.5,
+                    "class": `mediumText bold`,
+                    "data-genre-i": i
+                },gen.Name)
+            );
+        }
     });
     
 
