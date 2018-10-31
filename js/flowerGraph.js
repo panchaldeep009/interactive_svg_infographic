@@ -267,5 +267,4 @@
             movieInfo.querySelector("img").src = 'images/poster.jpg';
         });
     });
-
 })();

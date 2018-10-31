@@ -3,17 +3,29 @@
 @import '_mixins';
 
 @import '_variables';
+
 body{
     background-color: #555;
     overflow-x: hidden;
     font-family: sans-serif;
 }
+#posterBackground{
+    background-color: #333;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    opacity: .2;
+    filter: blur(10px);
+}
 #infoGraphics{
     position: relative;
     max-width:1000px;
-    width: 90%;
-    padding-top: 30px;
+    width: calc(90% - 30px);
+    padding: 30px;
     margin-left: 50%;
+    //background-color: rgba(#333, .75);
     @include transform(
         translateX(-50%)
     );
