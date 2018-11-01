@@ -3,12 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>Interactive Infographic of Movies' Genres </title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
 </head>
 <body>
+    
+    <img src="images/preloader.svg" alt="preLoader" id="preLoader">
+
+    <svg id="posterBackground" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
     <section id="infoGraphics">
+
         <h1>Movie Genres</h1>
 
         <h2>Top Movies and it's Genres</h2>
@@ -16,9 +23,10 @@
 
         <h2> Genres Average IMDB Rating & it's Interconnection</h2>
         <svg id="linerInfographic" xmlns="http://www.w3.org/2000/svg"></svg>
-
         
     </section>
+
+
     <div id="movieInfo">
         <img src="images/poster.jpg" alt="poster"/>
         <div id="info">
@@ -28,23 +36,23 @@
             <p>Plot</p>
         </div>
     </div>
+
     <div id="genInfo">
         <div>
-            <h4></h4>
+            <h4>Title</h4>
             <ul></ul>
         </div>
     </div>
-    <!-- to fetch data from internet -->
-    <!-- <script src="js/data.js"></script> -->
-    <!-- Output data -->
-    <script src="js/movieData.js"></script>
+
+    <!-- to fetch data -->
+    <script src="js/data.js"></script>
     <!-- to remap the data -->
     <script src="js/dataMaping.js"></script>
+    <!-- To draw Flower Type infoGraphic from data -->
+    <script src="js/flowerGraph.js"></script>
+    <!-- To draw interconnecting infoGraphic from data -->
+    <script src="js/interconnectingGraph.js"></script>
     <!-- Functions -->
     <script src="js/main.js"></script>
-    <!-- To draw Flower Type infographic from data -->
-    <script src="js/flowerGraph.js"></script>
-    <!-- To draw interconnecting infographic from data -->
-    <script src="js/interconnectingGraph.js"></script>
 </body>
 </html>
